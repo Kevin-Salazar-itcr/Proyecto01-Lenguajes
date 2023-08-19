@@ -15,27 +15,42 @@ bool menu(){
     printf("\t1. Gestion de catalogo\n\t2. Gestion de usuarios 2\n\t3. Historial de prestamos\n");
     printf("\t4. Vencimiento de prestamos\n\t5. Estadisticas\n\t6. Salir\n");
     printf("Ingrese una opcion >>");
-    opcion = getchar();
+    scanf(" %c", &opcion);
 
     switch (opcion){
         case '1':{
-	    printf("\ncaso 1\n");
+	        printf("\ncaso 1\n");
+            char c;
+            printf("Presione una tecla para continuar...\n");
+            scanf(" %c", &c);
             break;
         }
         case '2':{
-	    printf("\ncaso 2\n");
+	        printf("\ncaso 2\n");
+            char c;
+            printf("Presione una tecla para continuar...\n");
+            scanf(" %c", &c);
             break;
         }
         case '3':{
-	    printf("\ncaso 3\n");
+	        printf("\ncaso 3\n");
+            char c;
+            printf("Presione una tecla para continuar...\n");
+            scanf(" %c", &c);
             break;
         }
         case '4':{
-	    printf("\ncaso 4\n");
+	        printf("\ncaso 4\n");
+            char c;
+            printf("Presione una tecla para continuar...\n");
+            scanf(" %c", &c);
             break;
         }
         case '5':{
-	    printf("\ncaso 5\n");
+	        printf("\ncaso 5\n");
+            char c;
+            printf("Presione una tecla para continuar...\n");
+            scanf(" %c", &c);
             break;
         }
         case '6':{
@@ -45,10 +60,10 @@ bool menu(){
         }
         default:{
             printf("\nOpcion no valida\n");
-	    //En Linux no existe el system("pause") como en windows, se usa esto
+	        //En Linux no existe el system("pause") como en windows, se usa esto
             char c;
             printf("Presione una tecla para continuar...\n");
-            scanf("%c", &c);
+            scanf(" %c", &c);
             system("clear");
             break;
         }
