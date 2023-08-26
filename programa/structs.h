@@ -15,15 +15,14 @@ struct Usuario{
   char direccion[100]; 
 };
 
+
 struct Prestamo{
   int id;
   char usuario[50];
   int estado; 
   char nombre[50];
-  int idLibro;
-  int tardia;
-  int inicio;
-  int fin;
+  char fechaInicio[11]; 
+  char fechaFin[11];
 };
 
  
