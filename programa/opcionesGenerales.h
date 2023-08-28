@@ -1,23 +1,35 @@
 #include "auxiliares.h"
+#include "structs.h"
 
 /**
- * @brief funcion que solicita un texto al usuario para buscar en los archivos
- * muestra todos los id nombre y resumen de los archivos que contengan el texto solicitado
+ * @brief funcion que solicita un texto al usuario para buscar en los libros
+ * muestra todos los id nombre y resumen de los libros que contengan el texto solicitado
  */ 
-void busquedaSimple(){
+void busquedaSimple(listaLibros* l){
     char* texto = calloc(100, sizeof(char));
     printf("Ingrese el texto a buscar: ");
     scanf(" %[^\n]s", texto);
-    //aca se obtienen todos los nombres de los archivos
-    
-    //pseudocodigo del algoritmo
-    //contador para mostrar el numero de coincidencias
+
     int n = 0;
-    //por cada nombre de archivo
-        //se llama a la funcion buscarCoincidencias
-        //si la funcion retorna 1
-            //se muestra el id, nombre y resumen del archivo
-    printf("Se encontraron %d coincidencias\n", n);
+    Libro* aux = l->inicio;
+    while (aux != NULL)
+    {
+        if (buscarCoincidencias(aux->nombre, texto) > 0 || buscarCoincidencias(aux->resumen, texto) > 0 || buscarCoincidencias(aux->autor, texto) > 0)
+        {
+            printf("\nDetalles del Libro:\n");
+            printf("\tId: %d\n", aux->id);
+            printf("\tNombre:  %s\n", aux->nombre);
+            printf("\tAutor:  %s\n", aux->autor);
+            printf("\tAnio:  %d\n", aux->anio);
+            printf("\tGenero:  %s\n", aux->genero);
+            printf("\tResumen:  %s\n", aux->resumen);
+            printf("\tDisponibilidad: %s\n\n", aux->cantidad > 0 ? "Si" : "No");
+            n++;
+        }
+        aux = aux->sig;
+    }
+
+    printf("Se encontraron %d ejemplares con coincidencias\n", n);
     free(texto);
 }
 

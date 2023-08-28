@@ -6,11 +6,41 @@
 
 /**
  * @brief funcion que busca coincidencias de un texto en un archivo
- * @param textoBuscar texto a buscar en el archivo
- * @param texto texto donde se quiere buscar una coincidencia
- * @return 1 si se encontraron coincidencias, 0 si no se encontraron
+ * @param cadena texto donde se quiere buscar una coincidencia
+ * @param coincidencia texto a buscar
+ * @return la cantidad de coincidencias encontradas
  */
-int buscarCoincidencias(char* textoBuscar, char* texto);
+int buscarCoincidencias(char *cadena, char *coincidencia)
+{
+    int largoCadena = largo(cadena);
+    int largoCoincidencia = largo(coincidencia);
+    
+    int resultado = 0;
+    int i = 0;  // Índice para recorrer la cadena original
+    
+    while (i < largoCadena)
+    {
+        int coincide = 1;  // Variable para verificar si hay coincidencia
+        for (int k = 0; k < largoCoincidencia; k++)
+        {
+            if (cadena[i + k] != coincidencia[k])
+            {
+                coincide = 0;
+                break;
+            }
+        }
+
+        if (coincide)
+        {
+            resultado++;
+            i += largoCoincidencia;
+        }else{
+            i++;
+        }
+    }
+
+    return resultado;
+}
 
 /**
  * @brief funcion que solicita un texto al usuario para buscar en los archivos
