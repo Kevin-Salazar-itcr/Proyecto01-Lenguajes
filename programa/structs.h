@@ -92,11 +92,13 @@ Usuario* buscarUsuario(listaUsuarios* lista, int id){
 //********************************************************************************
 typedef struct Prestamo{
   int id;
-  char usuario[50];
-  int estado; 
-  char nombre[50];
-  char fechaInicio[11]; 
-  char fechaFin[11];
+  char* usuario;
+  char* nombreEjemplar;
+  int idEjemplar;
+  char* fechaInicio; 
+  char* fechaFin;
+  int estado;
+  char* fechaDevolucion;
   struct Prestamo* sig;
 };
 

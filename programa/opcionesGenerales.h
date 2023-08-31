@@ -30,14 +30,13 @@ void busquedaSimple(listaLibros* l){
     }
 
     printf("Se encontraron %d ejemplares con coincidencias\n", n);
-    free(texto);
 }
 
 /**
  * @brief funcion que solicita datos especificos al usuario para buscar en los archivos
  * muestra todos los id nombre y resumen de los archivos que contengan los datos solicitados por aparte o juntos a la vez
  */ 
-void busquedaAvanzada(){
+void busquedaAvanzada(listaLibros* l){
     char** datos = calloc(6, sizeof(char*));
     for (int i = 0; i < 6; i++){
         datos[i] = calloc(100, sizeof(char));
@@ -72,31 +71,70 @@ void busquedaAvanzada(){
         }
     }
     printf("\n\n*********Iniciando busqueda*********\n\n");
-    //aca se obtienen todos los nombres de los archivos
     
-    //pseudocodigo del algoritmo
-    //contador para mostrar el numero de coincidencias
     int n = 0;
-    //si el campo 6 dice que se quiere por todos los rubros
-        //por cada nombre de archivo
-            //llamar funcion aux buscarTodasCoinc(..., datos[5]) para saber si se busca por palabra exacta o coincidencia
-            //si la funcion retorna 1
-                //se muestra el id, nombre y resumen del archivo
-    //si el campo 6 dice que no se quiere por todos los rubros
-        //por cada nombre de archivo
-            //llamar funcion aux buscarCoinc(..., datos[5]) para saber si se busca por palabra exacta o coincidencia
-            //si la funcion retorna 1
-                //se muestra el id, nombre y resumen del archivo
-    printf("Se encontraron %d coincidencias\n", n);
-    free(texto);
+    Libro* aux = l->inicio;
+    while (aux != NULL)
+    {
+        //si se quiere buscar por coincidencia exacta (usando strcmp)
+        if(strcmp(datos[4], "s") == 0){
+            //si se quiere buscar por todos los rubros (uso de &&)
+            if(strcmp(datos[5], "s") == 0){
+                if(strcmp(datos[0], aux->nombre) == 0 && strcmp(datos[1], aux->autor) == 0 && strcmp(datos[2], aux->genero) == 0 && strcmp(datos[3], aux->resumen) == 0){
+                    printf("\nDetalles del Libro:\n");
+                    printf("\tId: %d\n", aux->id);
+                    printf("\tNombre:  %s\n", aux->nombre);
+                    printf("\tResumen:  %s\n", aux->resumen);
+                    n++;
+                }
+            }
+            //si no se quiere buscar por todos los rubros (uso de ||)
+            else{
+                if(strcmp(datos[0], aux->nombre) == 0 || strcmp(datos[1], aux->autor) == 0 || strcmp(datos[2], aux->genero) == 0 || strcmp(datos[3], aux->resumen) == 0){
+                    printf("\nDetalles del Libro:\n");
+                    printf("\tId: %d\n", aux->id);
+                    printf("\tNombre:  %s\n", aux->nombre);
+                    printf("\tResumen:  %s\n", aux->resumen);
+                    n++;
+                }
+            }
+        }
+        //si se quiere buscar por coincidencias (usando buscarCoincidencias)
+        else{
+            //si se quiere buscar por todos los rubros (uso de &&)
+            if(strcmp(datos[5], "s") == 0){
+                if(buscarCoincidencias(datos[0], aux->nombre) > 0 && buscarCoincidencias(datos[1], aux->autor) > 0 && buscarCoincidencias(datos[2], aux->genero) > 0 && buscarCoincidencias(datos[3], aux->resumen) > 0){
+                    printf("\nDetalles del Libro:\n");
+                    printf("\tId: %d\n", aux->id);
+                    printf("\tNombre:  %s\n", aux->nombre);
+                    printf("\tResumen:  %s\n", aux->resumen);
+                    n++;
+                }
+            }
+            //si no se quiere buscar por todos los rubros (uso de ||)
+            else{
+                if(buscarCoincidencias(datos[0], aux->nombre) > 0 || buscarCoincidencias(datos[1], aux->autor) > 0 || buscarCoincidencias(datos[2], aux->genero) > 0 || buscarCoincidencias(datos[3], aux->resumen) > 0){
+                    printf("\nDetalles del Libro:\n");
+                    printf("\tId: %d\n", aux->id);
+                    printf("\tNombre:  %s\n", aux->nombre);
+                    printf("\tResumen:  %s\n", aux->resumen);
+                    n++;
+                }
+            }
+        }
+        aux = aux->sig;
+    }
+    
+    printf("Se encontraron %d ejemplares con coincidencias\n", n);
+    free (datos);
 }
 
 /**
  * @brief funcion para hacer prestamo de un libro
  * 
  */
-void prestamoEjemplar(){
-    printf("indique su usuario: ");
+void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
+    printf("indique su id de usuario: ");
     char* usuario = calloc(100, sizeof(char));
     scanf(" %[^\n]s", usuario);
     printf("indique el id del ejemplar: ");
@@ -117,13 +155,60 @@ void prestamoEjemplar(){
 
         //se valida que la fecha de devolucion sea mayor a la fecha actual
         int valido = compararFechas(fechaPrestamo, fechaDevolucion);
-        if (valido == 1 || valido == 0){
+        if (valido != -1){
             printf("La fecha de devolucion debe ser mayor a la fecha actual\n\n");
         }else{
             break;
         }
     }
 
+    //validar que el usuario exista
+    Usuario* user = buscarUsuario(u, usuario);
+    if (user == NULL){
+        printf("El usuario no existe\n");
+        return;
+    }
+    
     //validar disponibilidad del ejemplar
+    Libro* aux = l->inicio;
+    while (aux != NULL)
+    {
+        if (strcmp(aux->id, id) == 0)
+        {
+            if (aux->cantidad > 1)
+            {
+                aux->cantidad--;
+                printf("El prestamo se ha realizado con exito\n");
+                
+                Prestamo* prestamo = calloc(1, sizeof(Prestamo));
+                prestamo->id = p->tam + 1;
+                prestamo->usuario = user->nombre;
+                prestamo->nombreEjemplar = aux->nombre;
+                prestamo->idEjemplar = aux->id;
+                prestamo->fechaInicio = fechaPrestamo;
+                prestamo->fechaFin = fechaDevolucion;
+                prestamo->estado = 1; //activo
+                prestamo->fechaDevolucion = "N/A";
+
+                printf("Detalles del prestamo:\n");
+                printf("\tId: %d\n", prestamo->id);
+                printf("\tUsuario:  %s\n", prestamo->usuario);
+                printf("\tNombre del ejemplar:  %s\n", prestamo->nombreEjemplar);
+                printf("\tId del ejemplar:  %d\n", prestamo->idEjemplar);
+                printf("\tFecha de inicio:  %s\n", prestamo->fechaInicio);
+                printf("\tFecha de devolucion:  %s\n", prestamo->fechaFin);
+
+                addPrestamo(p, prestamo);
+                return;
+            }
+            else{
+                printf("No hay ejemplares disponibles de este libro\n");
+                return;
+            }
+        }
+        aux = aux->sig;
+    }
+    printf("\n\nNo se encontro el ejemplar indicado\n\n");
+    return;
 }
 

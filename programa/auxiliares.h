@@ -43,27 +43,6 @@ int buscarCoincidencias(char *cadena, char *coincidencia)
 }
 
 /**
- * @brief funcion que solicita un texto al usuario para buscar en los archivos
- * muestra todos los id nombre y resumen de los archivos que contengan el texto solicitado
- */ 
-void busquedaSimple(){
-    char* texto = calloc(100, sizeof(char));
-    printf("Ingrese el texto a buscar: ");
-    scanf(" %[^\n]s", texto);
-    //aca se obtienen todos los nombres de los archivos
-    
-    //pseudocodigo del algoritmo
-    //contador para mostrar el numero de coincidencias
-    int n = 0;
-    //por cada nombre de archivo
-        //se llama a la funcion buscarCoincidencias
-        //si la funcion retorna 1
-            //se muestra el id, nombre y resumen del archivo
-    printf("Se encontraron %d coincidencias\n", n);
-    free(texto);
-}
-
-/**
  * @brief funcion auxiliar para obtener la fecha actual
  * @return fecha actual en formato dd/mm/aaaa
  */
@@ -152,4 +131,3 @@ int compararFechas(char* fecha1, char* fecha2) {
     // Las fechas son iguales
     return 0;
 }
-
