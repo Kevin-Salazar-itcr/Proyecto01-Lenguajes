@@ -131,3 +131,34 @@ int compararFechas(char* fecha1, char* fecha2) {
     // Las fechas son iguales
     return 0;
 }
+
+/**
+ * @brief funcion auxiliar para calcular la diferencia en dias entre dos fechas
+ * 
+ * @param fecha1 la primera fecha
+ * @param fecha2 la segunda fecha
+ * @return int la diferencia absoluta en dias entre las dos fechas
+ */
+int calcularDiferenciaEnDias(char* fecha1, char* fecha2) {
+    struct tm tm1 = {0};
+    struct tm tm2 = {0};
+
+    if (strptime(fecha1, "%d/%m/%Y", &tm1) == NULL || strptime(fecha2, "%d/%m/%Y", &tm2) == NULL) {
+        fprintf(stderr, "Error: Formato de fecha incorrecto.\n");
+        return -1; // Error
+    }
+
+    time_t time1 = mktime(&tm1);
+    time_t time2 = mktime(&tm2);
+
+    if (time1 == -1 || time2 == -1) {
+        fprintf(stderr, "Error: No se pudo convertir la fecha en tiempo.\n");
+        return -1; // Error
+    }
+
+    // Calcular la diferencia en segundos y convertirla a días
+    int diferenciaEnSegundos = abs((int)difftime(time1, time2));
+    int diferenciaEnDias = diferenciaEnSegundos / (60 * 60 * 24);
+
+    return diferenciaEnDias;
+}

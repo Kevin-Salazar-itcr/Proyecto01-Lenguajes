@@ -130,16 +130,25 @@ void busquedaAvanzada(listaLibros* l){
 }
 
 /**
- * @brief funcion para hacer prestamo de un libro
+ * @brief funcion para solicitar prestamo de un ejemplar
  * 
+ * @param l lista de libros
+ * @param u lista de usuarios
+ * @param p lista de prestamos
  */
 void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     printf("indique su id de usuario: ");
     char* usuario = calloc(100, sizeof(char));
     scanf(" %[^\n]s", usuario);
     printf("indique el id del ejemplar: ");
-    char* id = calloc(100, sizeof(char));
-    scanf(" %[^\n]s", id);
+    int id;
+    try{
+        scanf(" %d", id);
+    }
+    catch{
+        printf("Ingrese un id valido\n");
+        return;
+    }
     printf("\nEstimado usuario, la fecha de su prestamo sera situada desde hoy y hasta la fecha que indique\n");
 
     char* fechaPrestamo = fechaActual();
@@ -212,3 +221,76 @@ void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     return;
 }
 
+/**
+ * @brief funcion para devolver un ejemplar
+ * El sistema pide el id del prestamo y la fecha de devolucion (capturada automaticamente)
+ * @param l lista de libros
+ * @param u lista de usuarios
+ * @param p lista de prestamos
+ */
+
+/*
+tabla de montos para calculo de prestamo
+Duración préstamo|Tarifa día préstamo|Tarifa día tardía
+1 a 7 días       |150                |75
+8 a 15 días      |125                |50
+16 días o más    |100                |25
+*/
+void devolverEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
+    int idPrestamo;
+    printf("indique el id del prestamo: ");
+    try{
+        scanf(" %d", idPrestamo);
+    }
+    catch{
+        printf("Ingrese un id valido\n");
+        return;
+    }
+    char* fechaDevolucion = fechaActual();
+    
+    //validar que exista el prestamo
+    Prestamo* prestamo = buscarPrestamo(p, idPrestamo);
+    if (prestamo == NULL){
+        printf("El prestamo no existe\n");
+        return;
+    }
+    if (prestamo->estado == 0){
+        printf("El prestamo ya ha sido devuelto\n");
+        return;
+    }
+
+    //calcular monto a pagar
+    int diasHabiles = calcularDiferenciaEnDias(prestamo->fechaInicio, prestamo->fechaFin);
+    int diasEntrega = calcularDiferenciaEnDias(prestamo->fechaInicio, fechaDevolucion);
+    
+    if(diasEntrega == 0){
+        printf("No puede devolver el libro el mismo dia que lo presto\n");
+        return;
+    }
+
+    int monto = 0;
+    if(diasHabiles >= 1 && diasHabiles <= 7){
+        monto = 150 * diasEntrega;
+        if(diasEntrega > diasHabiles){
+            monto += 75 * (diasEntrega - diasHabiles);
+        }
+    }
+    else if(diasHabiles >= 8 && diasHabiles <= 15){
+        monto = 125 * diasEntrega;
+        if(diasEntrega > diasHabiles){
+            monto += 50 * (diasEntrega - diasHabiles);
+        }
+    }
+    else if(diasHabiles >= 16){
+        monto = 100 * diasEntrega;
+        if(diasEntrega > diasHabiles){
+            monto += 25 * (diasEntrega - diasHabiles);
+        }
+    }
+
+    printf("El monto a pagar es de %d\n", monto);
+    printf("Su prestamo ha sido devuelto con una tardia de %d dias\n", diasEntrega - diasHabiles);
+    prestamo->estado = 0;
+    prestamo->fechaDevolucion = fechaDevolucion;
+    return;
+}

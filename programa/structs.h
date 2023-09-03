@@ -2,11 +2,12 @@
 #include <stdlib.h> // malloc
 
 typedef struct Libro {
-    char nombre[50];
-    char autor[50];
+    int id;
+    char* nombre;
+    char* autor;
     int anio;
-    char genero[50];
-    char resumen[500];
+    char* genero;
+    char* resumen;
     int cantidad;
     struct Libro* sig;
 };
