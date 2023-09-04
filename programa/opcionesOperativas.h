@@ -1,6 +1,5 @@
 #include "auxiliares.h"
-#include "structs.h"
-
+#include "manejoJson.h"
 
 void top3LibrosPrestados(listaPrestamos* l) {
     struct {

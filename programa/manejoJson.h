@@ -96,7 +96,7 @@ void leerUsuarios(listaUsuarios* l){
  * 
  * @param l lista de prestamos donde se guardaran los datos
  */
-void leerPrestamo(listaPrestamos* l){
+void leerPrestamos(listaPrestamos* l){
     FILE *fp;
     char buffer[2048];
 

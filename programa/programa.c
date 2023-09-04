@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+#include "opcionesGenerales.h"
 
 /**
  * @brief Menu de opciones operativas
@@ -8,7 +6,7 @@
  * @return true volver al menu principal
  * @return false se repite el menu
  */
-bool opsOperativas(){
+bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
     char opcion;
     printf("      o    ~~~^-< ### >-^~~~    o\n      (___/ Biblioteca V1.0 \\___)\n********** *Menu de opciones* ***********\n");
     printf("\t1. Gestion de catalogo\n\t2. Gestion de usuarios 2\n\t3. Historial de prestamos\n");
@@ -57,7 +55,7 @@ bool opsOperativas(){
  * @return true volver al menu principal
  * @return false se repite el menu
  */
-bool opsGenerales(){
+bool opsGenerales(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
     char opcion;
     printf("      o    ~~~^-< ### >-^~~~    o\n      (___/ Biblioteca V1.0 \\___)\n********** *Menu de opciones* ***********\n");
     printf("\t1. Búsqueda simple\n\t2. Búsqueda avanzada\n\t3. Prestamo de ejemplar\n\t4. Devolución de ejemplar\n\t5. Volver\n");
@@ -101,7 +99,7 @@ bool opsGenerales(){
  * @return true se termina el programa
  * @return false se repite el menu
  */
-bool menu(){
+bool menu(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
     char opcion;
     printf("      o    ~~~^-< ### >-^~~~    o\n      (___/ Biblioteca V1.0 \\___)\n********** *Menu de opciones* ***********\n");
     printf("\t1. Opciones operativas\n\t2. Opciones generales 2\n\t3. Salir\n");
@@ -112,14 +110,14 @@ bool menu(){
         case '1':{
 	        bool final = false;
             while (!final){
-                final = opsOperativas();
+                final = opsOperativas(ll, lu, lp);
             }
             break;
         }
         case '2':{
 	        bool final = false;
             while (!final){
-                final = opsGenerales();
+                final = opsGenerales(ll, lu, lp);
             }
             break;
         }
@@ -140,9 +138,18 @@ bool menu(){
 
 // main
 int main(){
+    listaUsuarios *lu = calloc(1, sizeof(listaUsuarios));
+    listaLibros *ll = calloc(1, sizeof(listaLibros));
+    listaPrestamos *lp = calloc(1, sizeof(listaPrestamos));
+
+    // Cargar datos
+    leerUsuarios(lu);
+    leerLibros(ll);
+    leerPrestamos(lp);
+
     bool fin = false;
     while (!fin){
-        fin = menu();
+        fin = menu(lu, ll, lp);
     }
     return 0;
 }
