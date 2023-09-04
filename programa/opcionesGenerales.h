@@ -142,13 +142,8 @@ void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     scanf(" %[^\n]s", usuario);
     printf("indique el id del ejemplar: ");
     int id;
-    try{
-        scanf(" %d", id);
-    }
-    catch{
-        printf("Ingrese un id valido\n");
-        return;
-    }
+    scanf(" %d", id);
+    
     printf("\nEstimado usuario, la fecha de su prestamo sera situada desde hoy y hasta la fecha que indique\n");
 
     char* fechaPrestamo = fechaActual();
@@ -239,13 +234,7 @@ Duración préstamo|Tarifa día préstamo|Tarifa día tardía
 void devolverEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     int idPrestamo;
     printf("indique el id del prestamo: ");
-    try{
-        scanf(" %d", idPrestamo);
-    }
-    catch{
-        printf("Ingrese un id valido\n");
-        return;
-    }
+    scanf(" %d", idPrestamo);
     char* fechaDevolucion = fechaActual();
     
     //validar que exista el prestamo
