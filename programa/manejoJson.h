@@ -63,12 +63,14 @@ void leerLibros(listaLibros* l){
  * @param l lista de usuarios donde se guardaran los datos
  */
 void leerUsuarios(listaUsuarios* l){
+    //los usuarios tienen id nombre y direccion
     FILE *fp;
     char buffer[2048];
 
     struct json_object *parsed_json; //objeto que contiene el json 
     struct json_object *obj; //objeto que contiene los datos del json (como el cursor que se mueve por el json)
 
+    //datos que se quieren extraer del json (ej: id, nombre, etc)
     struct json_object *id;
     struct json_object *nombre;
     struct json_object *direccion;
@@ -82,16 +84,20 @@ void leerUsuarios(listaUsuarios* l){
     n = json_object_array_length(parsed_json);
 
     for(i = 0; i < n; i++){
-        Usuario* user = calloc(1, sizeof(Usuario));
+            Usuario* user = calloc(1, sizeof(Usuario));
 
-        obj = json_object_array_get_idx(parsed_json, i);
-        
-        user->id = json_object_get_int(id);
-        strcpy(user->nombre, json_object_get_string(nombre));
-        strcpy(user->direccion, json_object_get_string(direccion));
-        addUsuario(l, user);
+            obj = json_object_array_get_idx(parsed_json, i);
+            json_object_object_get_ex(obj, "id", &id); //extraer el id
+            json_object_object_get_ex(obj, "nombre", &nombre); //extraer el nombre
+            json_object_object_get_ex(obj, "direccion", &direccion); //extraer la direccion
+
+            user->id = json_object_get_int(id);
+            strcpy(user->nombre, json_object_get_string(nombre));
+            strcpy(user->direccion, json_object_get_string(direccion));
+            addUsuario(l, user);
     }
 }
+
 
 /**
  * @brief funcion para leer un archivo json y guardar los prestamos en una lista de prestamos
