@@ -1,64 +1,52 @@
 #include "auxiliares.h"
 #include "manejoJson.h"
 
-void top3UsuariosMasPrestamos(listaPrestamos* l) {
-    struct {
-        char* usuario;
-        int conteo;
-    } conteosUsuarios[l->tam];
+void top3prestados(listaPrestamos* l) {
+    int longitud = l->tam;  
+    NumeroAparicion* pares[longitud];
+    int numPares = 0;
 
-    // Inicializar los conteos en 0
-    for (int i = 0; i < l->tam; i++) {
-        conteosUsuarios[i].usuario = NULL;
-        conteosUsuarios[i].conteo = 0;
-    }
-
+    int arreglo[longitud];
     Prestamo* aux = l->inicio;
-    while (aux != NULL) {
-        char* usuario = aux->usuario;
-
-    }        
-    int encontrado = 0;
-    for (int i = 0; i < l->tam; i++) {
-        if (conteosUsuarios[i].usuario != NULL && strcmp(conteosUsuarios[i].usuario, usuario) == 0) {
-            conteosUsuarios[i].conteo++;
-            encontrado = 1;
-            break;
-        }
+    for (int i = 0; i < longitud; i++) {
+        arreglo[i] = aux->id;
+        aux = aux->sig;
     }
 
-    if (!encontrado) {
-        for (int i = 0; i < l->tam; i++) {
-            if (conteosUsuarios[i].usuario == NULL) {
-                conteosUsuarios[i].usuario = strdup(usuario);
-                conteosUsuarios[i].conteo = 1;
+    for (int i = 0; i < longitud; i++) {
+        int encontrado = 0;
+        for (int j = 0; j < numPares; j++) {
+            if (arreglo[i] == pares[j].numero) {
+                pares[j].apariciones++;
+                encontrado = 1;
                 break;
             }
         }
+
+        if (!encontrado) {
+            pares[numPares].numero = arreglo[i];
+            pares[numPares].apariciones = 1;
+            numPares++;
+        }
     }
 
-        aux = aux->sig;
-
-    for (int i = 0; i < l->tam - 1; i++) {
-        for (int j = i + 1; j < l->tam; j++) {
-            if (conteosUsuarios[i].conteo < conteosUsuarios[j].conteo) {
-
-                int tempConteo = conteosUsuarios[i].conteo;
-                char* tempUsuario = conteosUsuarios[i].usuario;
-                conteosUsuarios[i].conteo = conteosUsuarios[j].conteo;
-                conteosUsuarios[i].usuario = conteosUsuarios[j].usuario;
-                conteosUsuarios[j].conteo = tempConteo;
-                conteosUsuarios[j].usuario = tempUsuario;
+    // Ordena la estructura de pares en función del conteo (apariciones) de forma descendente
+    for (i = 0; i < numPares - 1; i++) {
+        for (j = i + 1; j < numPares; j++) {
+            if (pares[i].apariciones < pares[j].apariciones) {
+                struct NumeroAparicion temp = pares[i];
+                pares[i] = pares[j];
+                pares[j] = temp;
             }
         }
     }
 
-    printf("Top 3 Usuarios con Más Préstamos:\n");
-    for (int i = 0; i < 3 && conteosUsuarios[i].usuario != NULL; i++) {
-        printf("%d. %s (%d préstamos)\n", i + 1, conteosUsuarios[i].usuario, conteosUsuarios[i].conteo);
+    // Imprime los resultados ordenados
+    for (i = 0; i < 3; i++) {
+        Prestamo* prestamo = buscarPrestamo(pares[i]->numero);
+        printf("Top 3 usuarios con mas prestamos: \n\t%s: %d\n", prestamo->usuario, pares[i]->apariciones);
     }
 }
-
 
 
 void top3LibrosPrestados(listaPrestamos* l) {
@@ -152,7 +140,7 @@ void mostrarPrestamosRango(listaPrestamos* l)
             printf("\tId: %d\n", aux->id);
             printf("\tUsuario:  %s\n", aux->usuario);
             printf("\tEstado: %d\n", aux->estado);
-            printf("\tNombre:  %s\n", aux->nombre);
+            printf("\tNombre:  %s\n", aux->nombreEjemplar);
             printf("\tFecha de inicio:  %s\n", aux->fechaInicio);
             printf("\tFecha de fin:  %s\n\n", aux->fechaFin);
         }
@@ -236,7 +224,7 @@ void recuperarLibrosTxt(listaLibros* l)
         
         printf("Título:  %s\n", libro->nombre);
         printf("Autor:  %s\n", libro->autor);
-        printf("Año: %d\n", &libro->anio);
+        printf("Año: %d\n", libro->anio);
         printf("Género:  %s\n", libro->genero);
         printf("Descripción:  %s\n", libro->resumen);
         printf("Disponibles: %d\n", libro->cantidad);

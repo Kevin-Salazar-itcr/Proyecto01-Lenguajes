@@ -140,3 +140,8 @@ Prestamo* buscarPrestamo(listaPrestamos* lista, int id){
     return NULL;
 }
 //********************************************************************************
+//struct auxiliar para opciones operativas
+typedef struct NumeroAparicion {
+  int numero;
+  int apariciones;
+} NumeroAparicion;
