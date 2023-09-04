@@ -4,7 +4,7 @@
 
 
 void top3UsuariosMasPrestamos(listaPrestamos* l) {
-}    struct {
+    struct {
         char* usuario;
         int conteo;
     } conteosUsuarios[l->tam];
@@ -15,31 +15,31 @@ void top3UsuariosMasPrestamos(listaPrestamos* l) {
         conteosUsuarios[i].conteo = 0;
     }
 
-}    Prestamo* aux = l->inicio;
+    Prestamo* aux = l->inicio;
     while (aux != NULL) {
         char* usuario = aux->usuario;
 
-}        int encontrado = 0;
+    }        
+    int encontrado = 0;
+    for (int i = 0; i < l->tam; i++) {
+        if (conteosUsuarios[i].usuario != NULL && strcmp(conteosUsuarios[i].usuario, usuario) == 0) {
+            conteosUsuarios[i].conteo++;
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado) {
         for (int i = 0; i < l->tam; i++) {
-            if (conteosUsuarios[i].usuario != NULL && strcmp(conteosUsuarios[i].usuario, usuario) == 0) {
-                conteosUsuarios[i].conteo++;
-                encontrado = 1;
+            if (conteosUsuarios[i].usuario == NULL) {
+                conteosUsuarios[i].usuario = strdup(usuario);
+                conteosUsuarios[i].conteo = 1;
                 break;
             }
         }
-
-}        if (!encontrado) {
-            for (int i = 0; i < l->tam; i++) {
-                if (conteosUsuarios[i].usuario == NULL) {
-                    conteosUsuarios[i].usuario = strdup(usuario);
-                    conteosUsuarios[i].conteo = 1;
-                    break;
-                }
-            }
-        }
+    }
 
         aux = aux->sig;
-    }
 
     for (int i = 0; i < l->tam - 1; i++) {
         for (int j = i + 1; j < l->tam; j++) {
