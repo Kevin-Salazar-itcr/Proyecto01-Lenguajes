@@ -43,17 +43,17 @@ void busquedaAvanzada(listaLibros* l){
 
     }
     printf("Ingrese el nombre a buscar (0 si no desea buscar por este rubro): ");
-    scanf(" %[^\n]s", &datos[0]);
+    scanf(" %[^\n]s", datos[0]);
     printf("Ingrese el autor a buscar (0 si no desea buscar por este rubro): ");
-    scanf(" %[^\n]s", &datos[1]);
+    scanf(" %[^\n]s", datos[1]);
     printf("Ingrese el genero a buscar (0 si no desea buscar por este rubro): ");
-    scanf(" %[^\n]s", &datos[2]);
+    scanf(" %[^\n]s", datos[2]);
     printf("Ingrese el resumen a buscar (0 si no desea buscar por este rubro): ");
-    scanf(" %[^\n]s", &datos[3]);
+    scanf(" %[^\n]s", datos[3]);
     
     while(true){
         printf("Desea que se busque por coincidencia exacta? (s/n): ");
-        scanf(" %[^\n]s", &datos[4]);
+        scanf(" %[^\n]s", datos[4]);
         if (strcmp(datos[4], "s") == 0 || strcmp(datos[4], "n") == 0){
             break;
         }else{
@@ -63,7 +63,7 @@ void busquedaAvanzada(listaLibros* l){
 
     while(true){
         printf("Desea que se busque por todos los rubros? (s/n): ");
-        scanf(" %[^\n]s", &datos[5]);
+        scanf(" %[^\n]s", datos[5]);
         if (strcmp(datos[5], "s") == 0 || strcmp(datos[5], "n") == 0){
             break;
         }else{
@@ -142,7 +142,7 @@ void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     scanf(" %[^\n]s", usuario);
     printf("indique el id del ejemplar: ");
     int id;
-    scanf(" %d", id);
+    scanf(" %d", &id);
     
     printf("\nEstimado usuario, la fecha de su prestamo sera situada desde hoy y hasta la fecha que indique\n");
 
@@ -234,7 +234,7 @@ Duración préstamo|Tarifa día préstamo|Tarifa día tardía
 void devolverEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     int idPrestamo;
     printf("indique el id del prestamo: ");
-    scanf(" %d", idPrestamo);
+    scanf(" %d", &idPrestamo);
     char* fechaDevolucion = fechaActual();
     
     //validar que exista el prestamo
