@@ -138,8 +138,8 @@ void busquedaAvanzada(listaLibros* l){
  */
 void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     printf("indique su id de usuario: ");
-    char* usuario = calloc(100, sizeof(char));
-    scanf(" %[^\n]s", usuario);
+    int usuario = 0;
+    scanf("%d", &usuario);
     printf("indique el id del ejemplar: ");
     int id;
     scanf(" %d", &id);
@@ -177,7 +177,7 @@ void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     Libro* aux = l->inicio;
     while (aux != NULL)
     {
-        if (strcmp(aux->id, id) == 0)
+        if (aux->id == id)
         {
             if (aux->cantidad > 1)
             {

@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "auxiliares.h"
 #include "structs.h"
 
@@ -15,13 +14,9 @@ void mostrarPrestamosRango(listaPrestamos* l)
         printf("Ingrese la fecha de fin: ");
         scanf(" %[^\n]s", fechaFin);
         
-        if (esFechaValida(fechaInicio) && esFechaValida(fechaFin)){
-            if(compararFechas(prestamo->fechaInicio, prestamo->fechaFin) == 1){
-                break;
-            }
-            else{
-                printf("La fecha de inicio debe ser menor a la fecha de fin\n");
-            }
+        //validar que las fechas sean validas
+        if (esFechaValida(fechaInicio) && esFechaValida(fechaFin) && compararFechas(fechaInicio, fechaFin) == 1){
+            break; 
         }
         else{
             printf("Ingrese una fecha valida\n");
@@ -53,9 +48,9 @@ void incluir_Prestamo(listaPrestamos* l)
     printf("Ingrese el nombre del usuario: ");
     scanf(" %[^\n]s", prestamo->usuario);
     printf("Ingrese el estado del prestamo: ");
-    scanf("%d", prestamo->estado);
+    scanf("%d", &prestamo->estado);
     printf("Ingrese el nombre del libro: ");
-    scanf(" %[^\n]s", prestamo->nombre);
+    scanf(" %[^\n]s", prestamo->nombreEjemplar);
     while(true){
         printf("Ingrese la fecha de inicio del prestamo: ");
         scanf(" %[^\n]s", prestamo->fechaInicio);
