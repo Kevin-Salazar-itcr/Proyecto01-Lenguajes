@@ -10,12 +10,12 @@ typedef struct Libro {
     char* resumen;
     int cantidad;
     struct Libro* sig;
-};
+}Libro;
 
 typedef struct listaLibros {
     Libro* inicio;
     int tam;
-};
+}listaLibros;
 
 listaLibros* crearListaLibros(){
     listaLibros* lista = calloc(1, sizeof(listaLibros));
@@ -53,12 +53,12 @@ typedef struct Usuario{
   char nombre[50];
   char direccion[100]; 
   struct Usuario* sig;
-};
+}Usuario;
 
 typedef struct listaUsuarios{
   Usuario* inicio;
   int tam;
-};
+}listaUsuarios;
 
 listaUsuarios* crearListaUsuarios(){
   listaUsuarios* lista = calloc(1, sizeof(listaUsuarios));
@@ -101,12 +101,12 @@ typedef struct Prestamo{
   int estado;
   char* fechaDevolucion;
   struct Prestamo* sig;
-};
+}Prestamo;
 
 typedef struct listaPrestamos{
   Prestamo* inicio;
   int tam;
-};
+}listaPrestamos;
 
 listaPrestamos* crearListaPrestamos(){
   listaPrestamos* lista = calloc(1, sizeof(listaPrestamos));
