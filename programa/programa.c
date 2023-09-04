@@ -149,7 +149,7 @@ int main(){
 
     bool fin = false;
     while (!fin){
-        fin = menu(lu, ll, lp);
+        fin = menu(ll, lu, lp);
     }
     return 0;
 }

@@ -34,7 +34,7 @@ void top3prestados(listaPrestamos* l) {
     for (int i = 0; i < numPares - 1; i++) {
         for (int j = i + 1; j < numPares; j++) {
             if (pares[i]->apariciones < pares[j]->apariciones) {
-                struct NumeroAparicion temp = pares[i];
+                NumeroAparicion* temp = pares[i];
                 pares[i] = pares[j];
                 pares[j] = temp;
             }

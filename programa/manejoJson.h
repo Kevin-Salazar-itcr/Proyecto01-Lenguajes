@@ -71,6 +71,7 @@ void leerUsuarios(listaUsuarios* l){
 
     struct json_object *nombre;
     struct json_object *direccion;
+    struct json_object *id;
     size_t n,i;
 
     fp = fopen("datos/usuarios.json", "r"); //abrir archivo en modo lectura
