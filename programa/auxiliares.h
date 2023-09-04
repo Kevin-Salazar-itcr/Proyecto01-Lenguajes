@@ -10,6 +10,17 @@
  * @param coincidencia texto a buscar
  * @return la cantidad de coincidencias encontradas
  */
+
+int largo(char *cadena)
+{
+    int i = 0;
+    while (cadena[i] != '\0')
+    {
+        i++;
+    }
+    return i;
+}
+
 int buscarCoincidencias(char *cadena, char *coincidencia)
 {
     int largoCadena = largo(cadena);
