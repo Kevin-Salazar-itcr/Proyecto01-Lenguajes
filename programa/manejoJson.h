@@ -140,6 +140,10 @@ void leerPrestamo(listaPrestamos* l){
         strcpy(pres->usuario, json_object_get_string(usuario));
         strcpy(pres->nombreEjemplar, json_object_get_string(nombreEjemplar));
         pres->idEjemplar = json_object_get_int(idEjemplar);
+        strcpy(pres->fechaInicio, json_object_get_string(fechaInicio));
+        strcpy(pres->fechaFin, json_object_get_string(fechaFin));
+        pres->estado = json_object_get_int(estado);
+        strcpy(pres->fechaDevolucion, json_object_get_string(fechaDevolucion));
     }
 }    
 
@@ -223,7 +227,7 @@ void guardarPrestamosJson(listaPrestamos* l){
         json_object_object_add(obj, "idEjemplar", json_object_new_int(aux->idEjemplar)); 
         json_object_object_add(obj, "fechaInicio", json_object_new_string(aux->fechaInicio)); 
         json_object_object_add(obj, "fechaFin", json_object_new_string(aux->fechaFin)); 
-        json_object_object_add(obj, "estado", json_object_new_string(aux->estado)); 
+        json_object_object_add(obj, "estado", json_object_new_int(aux->estado)); 
         json_object_object_add(obj, "fechaDevolucion", json_object_new_string(aux->fechaDevolucion)); 
 
         json_object_array_add(json_array, obj);
