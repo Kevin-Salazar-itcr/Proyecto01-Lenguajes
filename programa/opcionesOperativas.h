@@ -1,6 +1,73 @@
 #include "auxiliares.h"
 #include "structs.h"
 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "auxiliares.h"
+#include "structs.h"
+
+void top3LibrosPrestados(listaPrestamos* l) {
+    struct {
+        char* titulo;
+        int conteo;
+    } conteosLibros[l->tam];
+
+    for (int i = 0; i < l->tam; i++) {
+        conteosLibros[i].titulo = NULL;
+        conteosLibros[i].conteo = 0;
+    }
+
+    Prestamo* aux = l->inicio;
+    while (aux != NULL) {
+        char* titulo = aux->nombreEjemplar;
+
+        int encontrado = 0;
+        for (int i = 0; i < l->tam; i++) {
+            if (conteosLibros[i].titulo != NULL && strcmp(conteosLibros[i].titulo, titulo) == 0) {
+                conteosLibros[i].conteo++;
+                encontrado = 1;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            for (int i = 0; i < l->tam; i++) {
+                if (conteosLibros[i].titulo == NULL) {
+                    conteosLibros[i].titulo = strdup(titulo);
+                    conteosLibros[i].conteo = 1;
+                    break;
+                }
+            }
+        }
+
+        aux = aux->sig;
+    }
+
+    for (int i = 0; i < l->tam - 1; i++) {
+        for (int j = i + 1; j < l->tam; j++) {
+            if (conteosLibros[i].conteo < conteosLibros[j].conteo) {
+                // Intercambiar entradas
+                int tempConteo = conteosLibros[i].conteo;
+                char* tempTitulo = conteosLibros[i].titulo;
+                conteosLibros[i].conteo = conteosLibros[j].conteo;
+                conteosLibros[i].titulo = conteosLibros[j].titulo;
+                conteosLibros[j].conteo = tempConteo;
+                conteosLibros[j].titulo = tempTitulo;
+            }
+        }
+    }
+
+    printf("Top 3 Libros Más Prestados:\n");
+    for (int i = 0; i < 3 && conteosLibros[i].titulo != NULL; i++) {
+        printf("%d. %s (%d veces prestado)\n", i + 1, conteosLibros[i].titulo, conteosLibros[i].conteo);
+    }
+
+}
+
+
+
 void mostrarPrestamosRango(listaPrestamos* l)
 {
 
