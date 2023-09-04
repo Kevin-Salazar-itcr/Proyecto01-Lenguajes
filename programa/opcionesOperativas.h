@@ -16,24 +16,24 @@ void top3prestados(listaPrestamos* l) {
     for (int i = 0; i < longitud; i++) {
         int encontrado = 0;
         for (int j = 0; j < numPares; j++) {
-            if (arreglo[i] == pares[j].numero) {
-                pares[j].apariciones++;
+            if (arreglo[i] == pares[j]->numero) {
+                pares[j]->apariciones++;
                 encontrado = 1;
                 break;
             }
         }
 
         if (!encontrado) {
-            pares[numPares].numero = arreglo[i];
-            pares[numPares].apariciones = 1;
+            pares[numPares]->numero = arreglo[i];
+            pares[numPares]->apariciones = 1;
             numPares++;
         }
     }
 
     // Ordena la estructura de pares en función del conteo (apariciones) de forma descendente
-    for (i = 0; i < numPares - 1; i++) {
-        for (j = i + 1; j < numPares; j++) {
-            if (pares[i].apariciones < pares[j].apariciones) {
+    for (int i = 0; i < numPares - 1; i++) {
+        for (int j = i + 1; j < numPares; j++) {
+            if (pares[i]->apariciones < pares[j]->apariciones) {
                 struct NumeroAparicion temp = pares[i];
                 pares[i] = pares[j];
                 pares[j] = temp;
@@ -42,8 +42,8 @@ void top3prestados(listaPrestamos* l) {
     }
 
     // Imprime los resultados ordenados
-    for (i = 0; i < 3; i++) {
-        Prestamo* prestamo = buscarPrestamo(pares[i]->numero);
+    for (int i = 0; i < 3; i++) {
+        Prestamo* prestamo = buscarPrestamo(l, pares[i]->numero);
         printf("Top 3 usuarios con mas prestamos: \n\t%s: %d\n", prestamo->usuario, pares[i]->apariciones);
     }
 }
