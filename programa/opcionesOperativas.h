@@ -150,7 +150,7 @@ void incluir_Usuario(listaUsuarios* l)
 
 void recuperarLibrosTxt(listaLibros* l) 
 {
-    FILE *archivo = fopen("doc->txt", "r");
+    FILE *archivo = fopen("doc.txt", "r");
     char linea[200];
     
     while (fgets(linea, sizeof(linea), archivo)) {
@@ -177,7 +177,7 @@ void recuperarLibrosTxt(listaLibros* l)
         
         printf("Título:  %s\n", libro->nombre);
         printf("Autor:  %s\n", libro->autor);
-        printf("Año: %d\n", libro->anio);
+        printf("Año: %d\n", &libro->anio);
         printf("Género:  %s\n", libro->genero);
         printf("Descripción:  %s\n", libro->resumen);
         printf("Disponibles: %d\n", libro->cantidad);
