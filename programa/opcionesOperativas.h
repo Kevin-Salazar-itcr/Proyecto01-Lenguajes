@@ -1,6 +1,68 @@
 #include "auxiliares.h"
 #include "manejoJson.h"
 
+
+
+void top3UsuariosMasPrestamos(listaPrestamos* l) {
+}    struct {
+        char* usuario;
+        int conteo;
+    } conteosUsuarios[l->tam];
+
+    // Inicializar los conteos en 0
+    for (int i = 0; i < l->tam; i++) {
+        conteosUsuarios[i].usuario = NULL;
+        conteosUsuarios[i].conteo = 0;
+    }
+
+}    Prestamo* aux = l->inicio;
+    while (aux != NULL) {
+        char* usuario = aux->usuario;
+
+}        int encontrado = 0;
+        for (int i = 0; i < l->tam; i++) {
+            if (conteosUsuarios[i].usuario != NULL && strcmp(conteosUsuarios[i].usuario, usuario) == 0) {
+                conteosUsuarios[i].conteo++;
+                encontrado = 1;
+                break;
+            }
+        }
+
+}        if (!encontrado) {
+            for (int i = 0; i < l->tam; i++) {
+                if (conteosUsuarios[i].usuario == NULL) {
+                    conteosUsuarios[i].usuario = strdup(usuario);
+                    conteosUsuarios[i].conteo = 1;
+                    break;
+                }
+            }
+        }
+
+        aux = aux->sig;
+    }
+
+    for (int i = 0; i < l->tam - 1; i++) {
+        for (int j = i + 1; j < l->tam; j++) {
+            if (conteosUsuarios[i].conteo < conteosUsuarios[j].conteo) {
+
+                int tempConteo = conteosUsuarios[i].conteo;
+                char* tempUsuario = conteosUsuarios[i].usuario;
+                conteosUsuarios[i].conteo = conteosUsuarios[j].conteo;
+                conteosUsuarios[i].usuario = conteosUsuarios[j].usuario;
+                conteosUsuarios[j].conteo = tempConteo;
+                conteosUsuarios[j].usuario = tempUsuario;
+            }
+        }
+    }
+
+    printf("Top 3 Usuarios con Más Préstamos:\n");
+    for (int i = 0; i < 3 && conteosUsuarios[i].usuario != NULL; i++) {
+        printf("%d. %s (%d préstamos)\n", i + 1, conteosUsuarios[i].usuario, conteosUsuarios[i].conteo);
+    }
+}
+
+
+
 void top3LibrosPrestados(listaPrestamos* l) {
     struct {
         char* titulo;
