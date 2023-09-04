@@ -1,6 +1,4 @@
-#include "auxiliares.h"
-#include "structs.h"
-
+#include "opcionesOperativas.h"
 /**
  * @brief funcion que solicita un texto al usuario para buscar en los libros
  * muestra todos los id nombre y resumen de los libros que contengan el texto solicitado
