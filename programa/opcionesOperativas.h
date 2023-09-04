@@ -2,12 +2,6 @@
 #include "structs.h"
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "auxiliares.h"
-#include "structs.h"
-
 void top3LibrosPrestados(listaPrestamos* l) {
     struct {
         char* titulo;
