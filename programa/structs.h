@@ -50,10 +50,11 @@ Libro* buscarLibro(listaLibros* lista, char* nombre){
 //********************************************************************************
 typedef struct Usuario{
   int id;
-  char nombre[50];
-  char direccion[100]; 
+  char *nombre;
+  char *direccion; 
   struct Usuario* sig;
 }Usuario;
+
 
 typedef struct listaUsuarios{
   Usuario* inicio;
@@ -67,7 +68,13 @@ listaUsuarios* crearListaUsuarios(){
   return lista;
 }
 
-void addUsuario(listaUsuarios* lista, Usuario* usuario){
+void addUsuario(listaUsuarios* lista, char* nombre, char* direccion){
+    Usuario* usuario = calloc(1, sizeof(Usuario));
+    usuario->id = lista->tam + 1;
+    usuario->nombre = nombre;
+    usuario->direccion = direccion;
+    usuario->sig = NULL;
+    
     if(lista->inicio == NULL){
         lista->inicio = usuario;
     }else{
