@@ -68,13 +68,7 @@ listaUsuarios* crearListaUsuarios(){
   return lista;
 }
 
-void addUsuario(listaUsuarios* lista, char* nombre, char* direccion){
-    Usuario* usuario = calloc(1, sizeof(Usuario));
-    usuario->id = lista->tam + 1;
-    usuario->nombre = nombre;
-    usuario->direccion = direccion;
-    usuario->sig = NULL;
-    
+void addUsuario(listaUsuarios* lista, Usuario* usuario){
     if(lista->inicio == NULL){
         lista->inicio = usuario;
     }else{

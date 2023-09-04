@@ -1,8 +1,6 @@
 #include "auxiliares.h"
 #include "manejoJson.h"
 
-
-
 void top3UsuariosMasPrestamos(listaPrestamos* l) {
     struct {
         char* usuario;
