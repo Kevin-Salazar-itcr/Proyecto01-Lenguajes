@@ -69,9 +69,9 @@ void leerUsuarios(listaUsuarios* l){
     struct json_object *parsed_json; //objeto que contiene el json 
     struct json_object *obj; //objeto que contiene los datos del json (como el cursor que se mueve por el json)
 
+    struct json_object *id;
     struct json_object *nombre;
     struct json_object *direccion;
-    struct json_object *id;
     size_t n,i;
 
     fp = fopen("datos/usuarios.json", "r"); //abrir archivo en modo lectura
@@ -82,14 +82,14 @@ void leerUsuarios(listaUsuarios* l){
     n = json_object_array_length(parsed_json);
 
     for(i = 0; i < n; i++){
-            Usuario* user = calloc(1, sizeof(Usuario));
+        Usuario* user = calloc(1, sizeof(Usuario));
 
-            obj = json_object_array_get_idx(parsed_json, i);
-            
-            user->id = json_object_get_int(id);
-            strcpy(user->nombre, json_object_get_string(nombre));
-            strcpy(user->direccion, json_object_get_string(direccion));
-            addUsuario(l, user);
+        obj = json_object_array_get_idx(parsed_json, i);
+        
+        user->id = json_object_get_int(id);
+        strcpy(user->nombre, json_object_get_string(nombre));
+        strcpy(user->direccion, json_object_get_string(direccion));
+        addUsuario(l, user);
     }
 }
 
