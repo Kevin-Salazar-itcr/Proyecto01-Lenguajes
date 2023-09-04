@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <json-c/json.h> //sudo apt install libjson-c-dev
 #include "structs.h"
-//como compilar en gcc
 //gcc archivoPrincipal -ljson-c (eso ultimo tambien sirve en g++)
 
 //**********************************************************************************************************************
@@ -18,7 +17,7 @@ void leerLibros(listaLibros* l){
     struct json_object *parsed_json; //objeto que contiene el json 
     struct json_object *obj; //objeto que contiene los datos del json (como el cursor que se mueve por el json)
 
-    //datos que se quieren extraer del json (ej: id, nombre, etc)
+     
     struct json_object *id;
     struct json_object *nombre;
     struct json_object *autor;
@@ -64,7 +63,6 @@ void leerLibros(listaLibros* l){
  * @param l lista de usuarios donde se guardaran los datos
  */
 void leerUsuarios(listaUsuarios* l){
-    //los usuarios tienen id nombre y direccion
     FILE *fp;
     char buffer[2048];
 
@@ -105,7 +103,6 @@ void leerPrestamo(listaPrestamos* l){
     struct json_object *parsed_json; //objeto que contiene el json 
     struct json_object *obj; //objeto que contiene los datos del json (como el cursor que se mueve por el json)
 
-    //datos que se quieren extraer del json (ej: id, nombre, etc)
     struct json_object *id;
     struct json_object *usuario;
     struct json_object *nombreEjemplar;
@@ -152,7 +149,12 @@ void leerPrestamo(listaPrestamos* l){
 //**********************************************************************************************************************
 //**********************************************************************************************************************
 
-void guardarLibrosJson(listaLibros* l) { //puede editarse y recibir parametros para guardar en el json (ej un struct o lista de structs)
+/**
+ * @brief funcion para guardar los libros de una lista en un archivo json
+ * 
+ * @param l lista de libros que se guardaran
+ */
+void guardarLibrosJson(listaLibros* l) {  
     struct json_object *json_array = json_object_new_array();
 
     Libro* aux = l->inicio;
@@ -168,16 +170,17 @@ void guardarLibrosJson(listaLibros* l) { //puede editarse y recibir parametros p
         json_object_object_add(obj, "cantidad", json_object_new_int(aux->cantidad)); 
 
         json_object_array_add(json_array, obj);
+        aux = aux->sig;
     }
     
     const char *json_str = json_object_to_json_string(json_array); // Convertir a string el objeto json
 
     // Guardar o sobreescribir en un archivo .json
-    FILE *file = fopen("datos/libros.json", "w");//guardar en un archivo .json en modo escritura
+    FILE *file = fopen("datos/libros.json", "w"); 
     if (file) {
         fprintf(file, "%s", json_str);
         fclose(file);
-        printf("Archivo guardado correctamente'\n");
+        printf("Archivo guardado correctamente\n");
     } else {
         printf("Error al guardar.\n");
     }
@@ -185,6 +188,11 @@ void guardarLibrosJson(listaLibros* l) { //puede editarse y recibir parametros p
     json_object_put(json_array); // Liberar memoria
 }
 
+/**
+ * @brief funcion para guardar los usuarios de una lista en un archivo json
+ * 
+ * @param l lista de usuarios que se guardaran
+ */
 void guardarUsuariosJson(listaUsuarios* l){
     struct json_object *json_array = json_object_new_array();
 
@@ -197,16 +205,17 @@ void guardarUsuariosJson(listaUsuarios* l){
         json_object_object_add(obj, "direccion", json_object_new_string(aux->direccion)); 
 
         json_object_array_add(json_array, obj);
+        aux = aux->sig;
     }
     
     const char *json_str = json_object_to_json_string(json_array); // Convertir a string el objeto json
 
     // Guardar o sobreescribir en un archivo .json
-    FILE *file = fopen("datos/usuarios.json", "w");//guardar en un archivo .json en modo escritura
+    FILE *file = fopen("datos/usuarios.json", "w"); 
     if (file) {
         fprintf(file, "%s", json_str);
         fclose(file);
-        printf("Archivo guardado correctamente'\n");
+        printf("Archivo guardado correctamente\n");
     } else {
         printf("Error al guardar.\n");
     }
@@ -214,6 +223,11 @@ void guardarUsuariosJson(listaUsuarios* l){
     json_object_put(json_array); // Liberar memoria
 }
 
+/**
+ * @brief funcion para guardar los prestamos de una lista en un archivo json
+ * 
+ * @param l lista de prestamos que se guardaran
+ */
 void guardarPrestamosJson(listaPrestamos* l){
     struct json_object *json_array = json_object_new_array();
 
@@ -231,16 +245,17 @@ void guardarPrestamosJson(listaPrestamos* l){
         json_object_object_add(obj, "fechaDevolucion", json_object_new_string(aux->fechaDevolucion)); 
 
         json_object_array_add(json_array, obj);
+        aux = aux->sig;
     }
     
     const char *json_str = json_object_to_json_string(json_array); // Convertir a string el objeto json
 
     // Guardar o sobreescribir en un archivo .json
-    FILE *file = fopen("datos/prestamos.json", "w");//guardar en un archivo .json en modo escritura
+    FILE *file = fopen("datos/prestamos.json", "w"); 
     if (file) {
         fprintf(file, "%s", json_str);
         fclose(file);
-        printf("Archivo guardado correctamente'\n");
+        printf("Archivo guardado correctamente\n");
     } else {
         printf("Error al guardar.\n");
     }
