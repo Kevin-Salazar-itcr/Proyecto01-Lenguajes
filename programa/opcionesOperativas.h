@@ -109,8 +109,8 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
 
 void mostrarPrestamosRango(listaPrestamos* l)
 {
-    char* fechaInicio;
-    char* fechaFin;
+    char* fechaInicio = calloc(10, sizeof(char));
+    char* fechaFin = calloc(10, sizeof(char));
 
     while(true){
         printf("Ingrese la fecha de inicio: ");
@@ -119,6 +119,9 @@ void mostrarPrestamosRango(listaPrestamos* l)
         printf("Ingrese la fecha de fin: ");
         scanf(" %[^\n]s", fechaFin);
         
+        //imprimir fechas
+        printf("Fecha de inicio: %s\n", fechaInicio);
+        printf("Fecha de fin: %s\n", fechaFin);
         //validar que las fechas sean validas
         if (esFechaValida(fechaInicio) && esFechaValida(fechaFin) && compararFechas(fechaInicio, fechaFin) == -1){
             break; 
