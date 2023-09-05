@@ -11,7 +11,7 @@ void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
     int arreglo[longitud];
     Prestamo* aux = l->inicio;
     for (int i = 0; i < longitud; i++) {
-        arreglo[i] = aux->usuario;
+        arreglo[i] = aux->idUsuario;
         aux = aux->sig;
     }
 
@@ -45,7 +45,7 @@ void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
 
     // Imprime los resultados ordenados
     for (int i = 0; i < 3; i++) {
-        Usuario* u = buscarUsuario(lu, pares[i]->numero);
+        Usuario* u = buscarUsuarioXid(lu, pares[i]->numero);
         printf("Top 3 usuarios con mas prestamos: \n\t%s: %d\n", u->nombre, pares[i]->apariciones);
     }
 }
@@ -93,7 +93,7 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
     // Imprime los resultados ordenados
     for (int i = 0; i < 3; i++) {
         printf("%d\n", pares[i]->numero);
-        Libro* lib = buscarLibro(ll, pares[i]->numero);
+        Libro* lib = buscarLibroXid(ll, pares[i]->numero);
         printf("Top 3 ejemplares con mas prestamos: \n\t%s: %d\n", lib->nombre, pares[i]->apariciones);
     }
 }

@@ -48,7 +48,7 @@ Libro* buscarLibro(listaLibros* lista, char* nombre){
     return NULL;
 }
 
-Libro* buscarLibro(listaLibros* lista, int id){
+Libro* buscarLibroXid(listaLibros* lista, int id){
     Libro* aux = lista->inicio;
     while(aux != NULL){
         if(id == aux->id){
@@ -103,7 +103,7 @@ Usuario* buscarUsuario(listaUsuarios* lista, char* nombre){
     return NULL;
 }
 
-Usuario* buscarUsuario(listaUsuarios* lista, int id){
+Usuario* buscarUsuarioXid(listaUsuarios* lista, int id){
     Usuario* aux = lista->inicio;
     while(aux != NULL){
         if(id == aux->id){

@@ -60,11 +60,11 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
                 scanf(" %c", &opcion2);
                 switch(opcion2){
                     case 'a':{
-                        top3libros(lp);
+                        top3libros(lp, ll);
                         break;
                     }
                     case 'b':{
-                        top3usuarios(lp);
+                        top3usuarios(lp, lu);
                         break;
                     }
                     case 'c':{
