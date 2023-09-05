@@ -50,8 +50,8 @@ Libro* buscarLibro(listaLibros* lista, char* nombre){
 //********************************************************************************
 typedef struct Usuario{
   int id;
-  char nombre[50];
-  char direccion[200]; 
+  char *nombre;
+  char *direccion; 
   struct Usuario* sig;
 }Usuario;
 
