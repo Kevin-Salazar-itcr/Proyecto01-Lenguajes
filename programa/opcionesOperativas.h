@@ -100,7 +100,9 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
     }
 
     // Imprime los resultados ordenados
-    for (int i = 0; i < 3; i++) {
+    
+    for (int i = 0; i < numPares; i++) {
+        if (i == 3) {break;}
         Libro* lib = buscarLibroXid(ll, pares[i]->numero);
         printf("Top 3 ejemplares con mas prestamos: \n");
         printf("\t%s: %d\n", lib->nombre, pares[i]->apariciones);
