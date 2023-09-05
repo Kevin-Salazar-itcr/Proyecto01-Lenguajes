@@ -13,7 +13,7 @@
  */
 void leerLibros(listaLibros* l){
     FILE *fp;
-    char buffer[10000];
+    char buffer[20000];
 
     struct json_object *parsed_json; //objeto que contiene el json 
     struct json_object *obj; //objeto que contiene los datos del json (como el cursor que se mueve por el json)
@@ -29,12 +29,11 @@ void leerLibros(listaLibros* l){
     size_t n,i;
 
     fp = fopen("datos/libros.json", "r"); //abrir archivo en modo lectura
-    fread(buffer, 10000, 1, fp);
+    fread(buffer, 20000, 1, fp);
     fclose(fp);
 
     parsed_json = json_tokener_parse(buffer);
     n = json_object_array_length(parsed_json);
-    printf("tam: %d\n", n);
 
     for(i = 0; i < n; i++){
             Libro* lib = calloc(1, sizeof(Libro));
