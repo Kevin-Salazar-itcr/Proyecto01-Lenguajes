@@ -43,11 +43,11 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
                 scanf(" %c", &opcion2);
                 switch(opcion2){
                     case 'a':{
-                        top3libros(ll);
+                        top3libros(lp);
                         break;
                     }
                     case 'b':{
-                        top3usuarios(lu);
+                        top3usuarios(lp);
                         break;
                     }
                     case 'c':{
@@ -107,7 +107,7 @@ bool opsGenerales(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
             break;
         }
         case '4':{
-	        devolucionEjemplar(ll, lu, lp);
+	        devolverEjemplar(ll, lu, lp);
             break;
         }
         case '5':{
