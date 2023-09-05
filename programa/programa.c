@@ -45,11 +45,11 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
             break;
         }
         case '4':{
-	        printf("\ncaso 4\n");
+	        mostrarPrestamosVencidos(lp);
             break;
         }
         case '5':{
-            char opcion2 = '';
+            char opcion2 = ' ';
             while(opcion2 != 'd'){
                 printf("a) Top 3 ejemplares mas prestados\n");
                 printf("b) Top 3 usuarios con mas prestamos\n");
