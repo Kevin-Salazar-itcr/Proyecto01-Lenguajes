@@ -48,11 +48,11 @@ void leerLibros(listaLibros* l){
             json_object_object_get_ex(obj, "cantidad", &cantidad); //extraer la cantidad
 
             lib->id = json_object_get_int(id);
-            strcpy(lib->nombre, json_object_get_string(nombre));
-            strcpy(lib->autor, json_object_get_string(autor));
+            lib->nombre = strdup(json_object_get_string(nombre));
+            lib->autor = strdup(json_object_get_string(autor));
             lib->anio = json_object_get_int(anio);
-            strcpy(lib->genero, json_object_get_string(genero));
-            strcpy(lib->resumen, json_object_get_string(resumen));
+            lib->genero = strdup(json_object_get_string(genero));
+            lib->resumen = strdup(json_object_get_string(resumen));
             lib->cantidad = json_object_get_int(cantidad);
             addLibro(l, lib);
     }
@@ -83,7 +83,7 @@ void leerUsuarios(listaUsuarios* l){
 
     parsed_json = json_tokener_parse(buffer);
     n = json_object_array_length(parsed_json);
-    
+
 
     for(i = 0; i < n; i++){
         Usuario* user = calloc(1, sizeof(Usuario));
@@ -93,9 +93,13 @@ void leerUsuarios(listaUsuarios* l){
         json_object_object_get_ex(obj, "nombre", &nombre); //extraer el nombre
         json_object_object_get_ex(obj, "direccion", &direccion); //extraer la direccion
 
+        printf("id: %d\n", json_object_get_int(id));
+        printf("nombre: %s\n", json_object_get_string(nombre));
+        printf("direccion: %s\n", json_object_get_string(direccion));
+
         user->id = json_object_get_int(id);
-        strcpy(user->nombre, json_object_get_string(nombre));
-        strcpy(user->direccion, json_object_get_string(direccion));
+        user->nombre = strdup(json_object_get_string(nombre));
+        user->direccion = strdup(json_object_get_string(direccion));
         addUsuario(l, user);
     }
 }
@@ -144,9 +148,14 @@ void leerPrestamo(listaPrestamos* l){
         json_object_object_get_ex(obj, "fechaDevolucion", &fechaDevolucion); //extraer la fechaDevolucion
 
         pres->id = json_object_get_int(id);
-        strcpy(pres->usuario, json_object_get_string(usuario));
-        strcpy(pres->nombreEjemplar, json_object_get_string(nombreEjemplar));
+        pres->usuario = strdup(json_object_get_string(usuario));
+        pres->nombreEjemplar = strdup(json_object_get_string(nombreEjemplar));
         pres->idEjemplar = json_object_get_int(idEjemplar);
+        pres->fechaInicio = strdup(json_object_get_string(fechaInicio));
+        pres->fechaFin = strdup(json_object_get_string(fechaFin));
+        pres->estado = json_object_get_int(estado);
+        pres->fechaDevolucion = strdup(json_object_get_string(fechaDevolucion));
+        addPrestamo(l, pres);
     }
 }    
 
@@ -171,6 +180,7 @@ void guardarLibrosJson(listaLibros* l) { //puede editarse y recibir parametros p
         json_object_object_add(obj, "cantidad", json_object_new_int(aux->cantidad)); 
 
         json_object_array_add(json_array, obj);
+        aux = aux->siguiente;
     }
     
     const char *json_str = json_object_to_json_string(json_array); // Convertir a string el objeto json
@@ -200,6 +210,7 @@ void guardarUsuariosJson(listaUsuarios* l){
         json_object_object_add(obj, "direccion", json_object_new_string(aux->direccion)); 
 
         json_object_array_add(json_array, obj);
+        aux = aux->siguiente;
     }
     
     const char *json_str = json_object_to_json_string(json_array); // Convertir a string el objeto json
@@ -234,6 +245,7 @@ void guardarPrestamosJson(listaPrestamos* l){
         json_object_object_add(obj, "fechaDevolucion", json_object_new_string(aux->fechaDevolucion)); 
 
         json_object_array_add(json_array, obj);
+        aux = aux->siguiente;
     }
     
     const char *json_str = json_object_to_json_string(json_array); // Convertir a string el objeto json
