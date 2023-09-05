@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 //top 3 usuarios con mas prestamos
-void top3usuarios(listaPrestamos* l) {
+void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
     int longitud = l->tam;  
     NumeroAparicion* pares[longitud];
     int numPares = 0;
@@ -11,7 +11,7 @@ void top3usuarios(listaPrestamos* l) {
     int arreglo[longitud];
     Prestamo* aux = l->inicio;
     for (int i = 0; i < longitud; i++) {
-        arreglo[i] = aux->id;
+        arreglo[i] = aux->usuario;
         aux = aux->sig;
     }
 
@@ -45,12 +45,12 @@ void top3usuarios(listaPrestamos* l) {
 
     // Imprime los resultados ordenados
     for (int i = 0; i < 3; i++) {
-        Prestamo* prestamo = buscarPrestamo(l, pares[i]->numero);
-        printf("Top 3 usuarios con mas prestamos: \n\t%s: %d\n", prestamo->usuario, pares[i]->apariciones);
+        Usuario* u = buscarUsuario(lu, pares[i]->numero);
+        printf("Top 3 usuarios con mas prestamos: \n\t%s: %d\n", u->nombre, pares[i]->apariciones);
     }
 }
 
-void top3libros(listaPrestamos* l){
+void top3libros(listaPrestamos* l, listaLibros* ll) {
     int longitud = l->tam;  
     NumeroAparicion* pares[longitud];
     int numPares = 0;
@@ -58,7 +58,7 @@ void top3libros(listaPrestamos* l){
     int arreglo[longitud];
     Prestamo* aux = l->inicio;
     for (int i = 0; i < longitud; i++) {
-        arreglo[i] = aux->id;
+        arreglo[i] = aux->idEjemplar;
         aux = aux->sig;
     }
 
@@ -93,8 +93,8 @@ void top3libros(listaPrestamos* l){
     // Imprime los resultados ordenados
     for (int i = 0; i < 3; i++) {
         printf("%d\n", pares[i]->numero);
-        Prestamo* prestamo = buscarPrestamo(l, pares[i]->numero);
-        printf("Top 3 ejemplares con mas prestamos: \n\t%s: %d\n", prestamo->nombreEjemplar, pares[i]->apariciones);
+        Libro* lib = buscarLibro(ll, pares[i]->numero);
+        printf("Top 3 ejemplares con mas prestamos: \n\t%s: %d\n", lib->nombre, pares[i]->apariciones);
     }
 }
 

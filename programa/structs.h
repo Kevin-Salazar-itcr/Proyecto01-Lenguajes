@@ -47,6 +47,17 @@ Libro* buscarLibro(listaLibros* lista, char* nombre){
     }
     return NULL;
 }
+
+Libro* buscarLibro(listaLibros* lista, int id){
+    Libro* aux = lista->inicio;
+    while(aux != NULL){
+        if(id == aux->id){
+            return aux;
+        }
+        aux = aux->sig;
+    }
+    return NULL;
+}
 //********************************************************************************
 typedef struct Usuario{
   int id;
@@ -81,6 +92,17 @@ void addUsuario(listaUsuarios* lista, Usuario* usuario){
     lista->tam++;
 }
 
+Usuario* buscarUsuario(listaUsuarios* lista, char* nombre){
+    Usuario* aux = lista->inicio;
+    while(aux != NULL){
+        if(strcmp(aux->nombre, nombre) == 0){
+            return aux;
+        }
+        aux = aux->sig;
+    }
+    return NULL;
+}
+
 Usuario* buscarUsuario(listaUsuarios* lista, int id){
     Usuario* aux = lista->inicio;
     while(aux != NULL){
@@ -94,6 +116,7 @@ Usuario* buscarUsuario(listaUsuarios* lista, int id){
 //********************************************************************************
 typedef struct Prestamo{
   int id;
+  int idUsuario;
   char* usuario;
   char* nombreEjemplar;
   int idEjemplar;

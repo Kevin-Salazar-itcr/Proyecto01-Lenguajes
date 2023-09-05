@@ -114,6 +114,7 @@ void leerPrestamo(listaPrestamos* l){
 
     //datos que se quieren extraer del json (ej: id, nombre, etc)
     struct json_object *id;
+    struct json_object *idUsuario;
     struct json_object *usuario;
     struct json_object *nombreEjemplar;
     struct json_object *idEjemplar;
@@ -135,6 +136,7 @@ void leerPrestamo(listaPrestamos* l){
 
         obj = json_object_array_get_idx(parsed_json, i);
         json_object_object_get_ex(obj, "id", &id); //extraer el id
+        json_object_object_get_ex(obj, "idUsuario", &idUsuario); //extraer el usuario
         json_object_object_get_ex(obj, "usuario", &usuario); //extraer el usuario
         json_object_object_get_ex(obj, "nombreEjemplar", &nombreEjemplar); //extraer el nombreEjemplar
         json_object_object_get_ex(obj, "idEjemplar", &idEjemplar); //extraer el idEjemplar
@@ -144,6 +146,7 @@ void leerPrestamo(listaPrestamos* l){
         json_object_object_get_ex(obj, "fechaDevolucion", &fechaDevolucion); //extraer la fechaDevolucion
 
         pres->id = json_object_get_int(id);
+        pres->idUsuario = json_object_get_int(idUsuario);
         pres->usuario = strdup(json_object_get_string(usuario));
         pres->nombreEjemplar = strdup(json_object_get_string(nombreEjemplar));
         pres->idEjemplar = json_object_get_int(idEjemplar);
@@ -232,13 +235,14 @@ void guardarPrestamosJson(listaPrestamos* l){
     while(aux != NULL){
         struct json_object *obj = json_object_new_object();
         json_object_object_add(obj, "id", json_object_new_int(aux->id)); 
-        json_object_object_add(obj, "usuario", json_object_new_string(aux->usuario)); 
-        json_object_object_add(obj, "nombreEjemplar", json_object_new_string(aux->nombreEjemplar)); 
-        json_object_object_add(obj, "idEjemplar", json_object_new_int(aux->idEjemplar)); 
-        json_object_object_add(obj, "fechaInicio", json_object_new_string(aux->fechaInicio)); 
-        json_object_object_add(obj, "fechaFin", json_object_new_string(aux->fechaFin)); 
-        json_object_object_add(obj, "estado", json_object_new_int(aux->estado)); 
-        json_object_object_add(obj, "fechaDevolucion", json_object_new_string(aux->fechaDevolucion)); 
+        json_object_object_add(obj, "idUsuario", json_object_new_int(aux->idUsuario));
+        json_object_object_add(obj, "usuario", json_object_new_string(aux->usuario));
+        json_object_object_add(obj, "nombreEjemplar", json_object_new_string(aux->nombreEjemplar));
+        json_object_object_add(obj, "idEjemplar", json_object_new_int(aux->idEjemplar));
+        json_object_object_add(obj, "fechaInicio", json_object_new_string(aux->fechaInicio));
+        json_object_object_add(obj, "fechaFin", json_object_new_string(aux->fechaFin));
+        json_object_object_add(obj, "estado", json_object_new_int(aux->estado));
+        json_object_object_add(obj, "fechaDevolucion", json_object_new_string(aux->fechaDevolucion));
 
         json_object_array_add(json_array, obj);
         aux = aux->sig;

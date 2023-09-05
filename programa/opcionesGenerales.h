@@ -184,6 +184,7 @@ void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
                 
                 Prestamo* prestamo = calloc(1, sizeof(Prestamo));
                 prestamo->id = p->tam + 1;
+                prestamo->idUsuario = user->id;
                 prestamo->usuario = user->nombre;
                 prestamo->nombreEjemplar = aux->nombre;
                 prestamo->idEjemplar = aux->id;
