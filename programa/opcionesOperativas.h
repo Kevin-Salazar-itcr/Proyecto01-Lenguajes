@@ -1,7 +1,8 @@
 #include "auxiliares.h"
 #include "manejoJson.h"
 
-void top3prestados(listaPrestamos* l) {
+//top 3 usuarios con mas prestamos
+void top3usuarios(listaPrestamos* l) {
     int longitud = l->tam;  
     NumeroAparicion* pares[longitud];
     int numPares = 0;
@@ -48,66 +49,52 @@ void top3prestados(listaPrestamos* l) {
     }
 }
 
+void top3libros(listaPrestamos* l){
+    int longitud = l->tam;  
+    NumeroAparicion* pares[longitud];
+    int numPares = 0;
 
-void top3LibrosPrestados(listaPrestamos* l) {
-    struct {
-        char* titulo;
-        int conteo;
-    } conteosLibros[l->tam];
-
-    for (int i = 0; i < l->tam; i++) {
-        conteosLibros[i].titulo = NULL;
-        conteosLibros[i].conteo = 0;
+    int arreglo[longitud];
+    Prestamo* aux = l->inicio;
+    for (int i = 0; i < longitud; i++) {
+        arreglo[i] = aux->id;
+        aux = aux->sig;
     }
 
-    Prestamo* aux = l->inicio;
-    while (aux != NULL) {
-        char* titulo = aux->nombreEjemplar;
-
+    for (int i = 0; i < longitud; i++) {
         int encontrado = 0;
-        for (int i = 0; i < l->tam; i++) {
-            if (conteosLibros[i].titulo != NULL && strcmp(conteosLibros[i].titulo, titulo) == 0) {
-                conteosLibros[i].conteo++;
+        for (int j = 0; j < numPares; j++) {
+            if (arreglo[i] == pares[j]->numero) {
+                pares[j]->apariciones++;
                 encontrado = 1;
                 break;
             }
         }
 
         if (!encontrado) {
-            for (int i = 0; i < l->tam; i++) {
-                if (conteosLibros[i].titulo == NULL) {
-                    conteosLibros[i].titulo = strdup(titulo);
-                    conteosLibros[i].conteo = 1;
-                    break;
-                }
-            }
+            pares[numPares]->numero = arreglo[i];
+            pares[numPares]->apariciones = 1;
+            numPares++;
         }
-
-        aux = aux->sig;
     }
 
-    for (int i = 0; i < l->tam - 1; i++) {
-        for (int j = i + 1; j < l->tam; j++) {
-            if (conteosLibros[i].conteo < conteosLibros[j].conteo) {
-                // Intercambiar entradas
-                int tempConteo = conteosLibros[i].conteo;
-                char* tempTitulo = conteosLibros[i].titulo;
-                conteosLibros[i].conteo = conteosLibros[j].conteo;
-                conteosLibros[i].titulo = conteosLibros[j].titulo;
-                conteosLibros[j].conteo = tempConteo;
-                conteosLibros[j].titulo = tempTitulo;
+    // Ordena la estructura de pares en función del conteo (apariciones) de forma descendente
+    for (int i = 0; i < numPares - 1; i++) {
+        for (int j = i + 1; j < numPares; j++) {
+            if (pares[i]->apariciones < pares[j]->apariciones) {
+                NumeroAparicion* temp = pares[i];
+                pares[i] = pares[j];
+                pares[j] = temp;
             }
         }
     }
 
-    printf("Top 3 Libros Más Prestados:\n");
-    for (int i = 0; i < 3 && conteosLibros[i].titulo != NULL; i++) {
-        printf("%d. %s (%d veces prestado)\n", i + 1, conteosLibros[i].titulo, conteosLibros[i].conteo);
+    // Imprime los resultados ordenados
+    for (int i = 0; i < 3; i++) {
+        Prestamo* prestamo = buscarPrestamo(l, pares[i]->numero);
+        printf("Top 3 ejemplares con mas prestamos: \n\t%s: %d\n", prestamo->nombreEjemplar, pares[i]->apariciones);
     }
-
 }
-
-
 
 void mostrarPrestamosRango(listaPrestamos* l)
 {
@@ -193,16 +180,18 @@ void incluir_Usuario(listaUsuarios* l)
     scanf("  %[^\n]s", usuario->direccion);
     
     addUsuario(l, usuario);
+    printf("Usuario agregado exitosamente\n");
 }
 
 void recuperarLibrosTxt(listaLibros* l) 
 {
-    FILE *archivo = fopen("doc.txt", "r");
-    char linea[200];
+    FILE *archivo = fopen("datos/doc.txt", "r");
+    char linea[1024];
     
     while (fgets(linea, sizeof(linea), archivo)) {
         
         Libro* libro = calloc(1, sizeof(Libro));
+        libro->id = l->tam + 1;
         
         char *palabra = strtok(linea, "|");
         strcpy(libro->nombre, palabra);

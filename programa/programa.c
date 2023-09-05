@@ -16,15 +16,15 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
 
     switch (opcion){
         case '1':{
-	        printf("\ncaso 1\n");
+            recuperarLibrosTxt(ll);
             break;
         }
         case '2':{
-	        printf("\ncaso 2\n");
+	        incluir_Usuario(lu);
             break;
         }
         case '3':{
-	        printf("\ncaso 3\n");
+	        mostrarPrestamosRango(lp);
             break;
         }
         case '4':{
@@ -32,7 +32,38 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
             break;
         }
         case '5':{
-	        printf("\ncaso 5\n");
+            char opcion2;
+            while(opcion2 != 'd'){
+                printf("a) Top 3 ejemplares mas prestados\n");
+                printf("b) Top 3 usuarios con mas prestamos\n");
+                printf("c) Top 5 de mes-anio con mayor monto recaudado\n");
+                printf("d) Volver\n");
+                printf("Seleccione una opcion>>");
+                
+                scanf(" %c", &opcion2);
+                switch(opcion2){
+                    case 'a':{
+                        top3libros(ll);
+                        break;
+                    }
+                    case 'b':{
+                        top3usuarios(lu);
+                        break;
+                    }
+                    case 'c':{
+                        printf("Sin implementar\n");
+                        break;
+                    }
+                    case 'd':{
+                        system("clear");
+                        break;
+                    }
+                    default:{
+                        printf("\nOpcion no valida\n");
+                        break;
+                    }
+                }
+            }
             break;
         }
         case '6':{
@@ -42,7 +73,7 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
         default:{
             printf("\nOpcion no valida\n");
 	        //En Linux no existe el system("pause") como en windows, se usa esto
-             system("clear");
+            system("clear");
             break;
         }
     }
@@ -64,19 +95,19 @@ bool opsGenerales(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
 
     switch (opcion){
         case '1':{
-	        printf("\ncaso 1\n");
+	        busquedaSimple(ll);
             break;
         }
         case '2':{
-	        printf("\ncaso 2\n");
+	        busquedaAvanzada(ll);
             break;
         }
         case '3':{
-	        printf("\ncaso 3\n");
+	        prestamoEjemplar(ll, lu, lp);
             break;
         }
         case '4':{
-	        printf("\ncaso 4\n");
+	        devolucionEjemplar(ll, lu, lp);
             break;
         }
         case '5':{
