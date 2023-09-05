@@ -102,13 +102,13 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
     // Imprime los resultados ordenados
     for (int i = 0; i < 3; i++) {
         Libro* lib = buscarLibroXid(ll, pares[i]->numero);
-        printf("Top 3 ejemplares con mas prestamos: \n\t%s: %d\n", lib->nombre, pares[i]->apariciones);
+        printf("Top 3 ejemplares con mas prestamos: \n");
+        printf("\t%s: %d\n", lib->nombre, pares[i]->apariciones);
     }
 }
 
 void mostrarPrestamosRango(listaPrestamos* l)
 {
-
     char* fechaInicio;
     char* fechaFin;
 
@@ -128,6 +128,7 @@ void mostrarPrestamosRango(listaPrestamos* l)
         }
     }
 
+    printf("\nResultados:\n");
     Prestamo* aux = l->inicio;
     while (aux != NULL)
     {
