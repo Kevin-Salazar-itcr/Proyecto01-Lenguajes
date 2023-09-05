@@ -171,24 +171,19 @@ void incluir_Prestamo(listaPrestamos* l)
 
 void incluir_Usuario(listaUsuarios* l)
 {
-    int id;
-    char* nombre = '\0';
-    char* direccion = '\0';
-
-    printf("Ingrese la identificacion del usuario: ");
-    scanf(" %d", &id);
+    Usuario* usuario = calloc(1, sizeof(Usuario));
+    printf("Ingrese la identificación del usuario: ");
+    scanf("%d", &usuario->id);
+    getchar(); 
 
     printf("Ingrese el nombre del usuario: ");
-    scanf(" %[^\n]s", nombre);
-    printf("Ingrese la direccion del usuario: ");
-    scanf(" %[^\n]s", direccion);
+    fgets(usuario->nombre, sizeof(usuario->nombre), stdin);
+    usuario->nombre[strcspn(usuario->nombre, "\n")] = '\0'; // Eliminar el carácter de nueva línea
 
-    Usuario* usuario = calloc(1, sizeof(Usuario));
-    
-    usuario->id = id;
-    usuario->nombre = strdup(nombre);
-    usuario->direccion = strdup(direccion);
-    
+    printf("Ingrese la dirección del usuario: ");
+    fgets(usuario->direccion, sizeof(usuario->direccion), stdin);
+    usuario->direccion[strcspn(usuario->direccion, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+
     addUsuario(l, usuario);
     printf("Usuario agregado exitosamente\n");
 }
