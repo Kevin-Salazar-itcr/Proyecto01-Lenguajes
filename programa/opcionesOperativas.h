@@ -91,6 +91,7 @@ void top3libros(listaPrestamos* l){
 
     // Imprime los resultados ordenados
     for (int i = 0; i < 3; i++) {
+        printf("%d\n", pares[i]->numero);
         Prestamo* prestamo = buscarPrestamo(l, pares[i]->numero);
         printf("Top 3 ejemplares con mas prestamos: \n\t%s: %d\n", prestamo->nombreEjemplar, pares[i]->apariciones);
     }
@@ -175,9 +176,9 @@ void incluir_Usuario(listaUsuarios* l)
     scanf("%d", &usuario->id);
 
     printf("Ingrese el nombre del usuario: ");
-    scanf("  %[^\n]s", usuario->nombre);
+    scanf(" %[^\n]s", usuario->nombre);
     printf("Ingrese la direccion del usuario: ");
-    scanf("  %[^\n]s", usuario->direccion);
+    scanf(" %[^\n]s", usuario->direccion);
     
     addUsuario(l, usuario);
     printf("Usuario agregado exitosamente\n");

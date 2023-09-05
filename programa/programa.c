@@ -185,5 +185,13 @@ int main(){
     while (!fin){
         fin = menu(ll, lu, lp);
     }
+
+    // Guardar datos
+    guardarUsuariosJson(lu);
+    printf("Usuarios guardados\n");
+    guardarLibrosJson(ll);
+    printf("Libros guardados\n");
+    guardarPrestamosJson(lp);
+    printf("Prestamos guardados\n");
     return 0;
 }
