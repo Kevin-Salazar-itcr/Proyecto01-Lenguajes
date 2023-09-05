@@ -148,19 +148,19 @@ void recuperarLibrosTxt(listaLibros* l)
         libro->id = l->tam + 1;
         
         char *palabra = strtok(linea, "|");
-        strcpy(libro->nombre, palabra);
+        libro->nombre = strdup (palabra);
         
         palabra = strtok(NULL, "|");
-        strcpy(libro->autor, palabra);
+        libro->autor = strdup(palabra);
         
         palabra = strtok(NULL, "|");
         libro->anio = strtol(palabra, NULL, 10);
         
         palabra = strtok(NULL, "|");
-        strcpy(libro->genero, palabra);
+        libro->genero = strdup(palabra);
         
         palabra = strtok(NULL, "|");
-        strcpy(libro->resumen, palabra);
+        libro->resumen = strdup(palabra);
         
         palabra = strtok(NULL, "|");
         libro->cantidad = strtol(palabra, NULL, 10);
