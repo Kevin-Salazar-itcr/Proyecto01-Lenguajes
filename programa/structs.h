@@ -17,6 +17,11 @@ typedef struct listaLibros {
     int tam;
 }listaLibros;
 
+/**
+ * @brief Crea una lista de libros
+ * 
+ * @return listaLibros* 
+ */
 listaLibros* crearListaLibros(){
     listaLibros* lista = calloc(1, sizeof(listaLibros));
     lista->inicio = NULL;
@@ -24,6 +29,12 @@ listaLibros* crearListaLibros(){
     return lista;
 }
 
+/**
+ * @brief Agrega un libro a la lista
+ *
+ * @param lista lista de libros
+ * @param libro libro a agregar
+ */
 void addLibro(listaLibros* lista, Libro* libro){
     if(lista->inicio == NULL){
         lista->inicio = libro;
@@ -37,6 +48,13 @@ void addLibro(listaLibros* lista, Libro* libro){
     lista->tam++;
 }
 
+/**
+ * @brief Busca un libro por nombre
+ * 
+ * @param lista lista de libros
+ * @param nombre nombre a buscar
+ * @return Libro* si se encuentra el libro, NULL si no se encuentra
+ */
 Libro* buscarLibro(listaLibros* lista, char* nombre){
     Libro* aux = lista->inicio;
     while(aux != NULL){
@@ -48,6 +66,13 @@ Libro* buscarLibro(listaLibros* lista, char* nombre){
     return NULL;
 }
 
+/**
+ * @brief Busca un libro por id
+ * 
+ * @param lista lista de libros
+ * @param id id a buscar
+ * @return Libro* si se encuentra el libro, NULL si no se encuentra
+ */
 Libro* buscarLibroXid(listaLibros* lista, int id){
     Libro* aux = lista->inicio;
     while(aux != NULL){
@@ -72,6 +97,11 @@ typedef struct listaUsuarios{
   int tam;
 }listaUsuarios;
 
+/**
+ * @brief Crea una lista de usuarios
+ * 
+ * @return listaUsuarios* 
+ */
 listaUsuarios* crearListaUsuarios(){
   listaUsuarios* lista = calloc(1, sizeof(listaUsuarios));
   lista->inicio = NULL;
@@ -79,6 +109,12 @@ listaUsuarios* crearListaUsuarios(){
   return lista;
 }
 
+/**
+ * @brief Agrega un usuario a la lista
+ *
+ * @param lista lista de usuarios
+ * @param usuario usuario a agregar
+ */
 void addUsuario(listaUsuarios* lista, Usuario* usuario){
     if(lista->inicio == NULL){
         lista->inicio = usuario;
@@ -92,6 +128,13 @@ void addUsuario(listaUsuarios* lista, Usuario* usuario){
     lista->tam++;
 }
 
+/**
+ * @brief Busca un usuario por nombre
+ * 
+ * @param lista lista de usuarios
+ * @param nombre nombre a buscar
+ * @return Usuario* si se encuentra el usuario, NULL si no se encuentra
+ */
 Usuario* buscarUsuario(listaUsuarios* lista, char* nombre){
     Usuario* aux = lista->inicio;
     while(aux != NULL){
@@ -103,6 +146,13 @@ Usuario* buscarUsuario(listaUsuarios* lista, char* nombre){
     return NULL;
 }
 
+/**
+ * @brief Busca un usuario por id
+ * 
+ * @param lista lista de usuarios
+ * @param id id a buscar
+ * @return Usuario* si se encuentra el usuario, NULL si no se encuentra 
+ */
 Usuario* buscarUsuarioXid(listaUsuarios* lista, int id){
     Usuario* aux = lista->inicio;
     while(aux != NULL){
@@ -133,6 +183,11 @@ typedef struct listaPrestamos{
   int tam;
 }listaPrestamos;
 
+/**
+ * @brief Crea una lista de prestamos
+ * 
+ * @return listaPrestamos* 
+ */
 listaPrestamos* crearListaPrestamos(){
   listaPrestamos* lista = calloc(1, sizeof(listaPrestamos));
   lista->inicio = NULL;
@@ -140,6 +195,12 @@ listaPrestamos* crearListaPrestamos(){
   return lista;
 }
 
+/**
+ * @brief Agrega un prestamo a la lista
+ *
+ * @param lista lista de prestamos
+ * @param prestamo prestamo a agregar
+ */
 void addPrestamo(listaPrestamos* lista, Prestamo* prestamo){
     if(lista->inicio == NULL){
         lista->inicio = prestamo;
@@ -153,6 +214,13 @@ void addPrestamo(listaPrestamos* lista, Prestamo* prestamo){
     lista->tam++;
 }
 
+/**
+ * @brief Busca un prestamo por id
+ * 
+ * @param lista lista de prestamos
+ * @param id id a buscar
+ * @return Prestamo* si se encuentra el prestamo, NULL si no se encuentra
+ */
 Prestamo* buscarPrestamo(listaPrestamos* lista, int id){
     Prestamo* aux = lista->inicio;
     while(aux != NULL){

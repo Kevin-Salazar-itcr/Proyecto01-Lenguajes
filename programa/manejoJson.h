@@ -167,7 +167,12 @@ void leerPrestamo(listaPrestamos* l){
 //**********************************************************************************************************************
 //**********************************************************************************************************************
 
-void guardarLibrosJson(listaLibros* l) { //puede editarse y recibir parametros para guardar en el json (ej un struct o lista de structs)
+/**
+ * @brief funcion para guardar los libros en un archivo json
+ * 
+ * @param l lista de libros donde se guardan los datos
+ */
+void guardarLibrosJson(listaLibros* l) { 
     struct json_object *json_array = json_object_new_array();
 
     Libro* aux = l->inicio;
@@ -201,6 +206,11 @@ void guardarLibrosJson(listaLibros* l) { //puede editarse y recibir parametros p
     json_object_put(json_array); // Liberar memoria
 }
 
+/**
+ * @brief funcion para guardar los usuarios en un archivo json
+ * 
+ * @param l lista de usuarios donde se guardan los datos
+ */
 void guardarUsuariosJson(listaUsuarios* l){
     struct json_object *json_array = json_object_new_array();
 
@@ -231,6 +241,11 @@ void guardarUsuariosJson(listaUsuarios* l){
     json_object_put(json_array); // Liberar memoria
 }
 
+/**
+ * @brief funcion para guardar los prestamos en un archivo json
+ * 
+ * @param l lista de prestamos donde se guardan los datos
+ */
 void guardarPrestamosJson(listaPrestamos* l){
     struct json_object *json_array = json_object_new_array();
 
