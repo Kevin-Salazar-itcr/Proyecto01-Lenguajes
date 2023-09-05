@@ -83,6 +83,7 @@ void leerUsuarios(listaUsuarios* l){
 
     parsed_json = json_tokener_parse(buffer);
     n = json_object_array_length(parsed_json);
+    
 
     for(i = 0; i < n; i++){
         Usuario* user = calloc(1, sizeof(Usuario));
