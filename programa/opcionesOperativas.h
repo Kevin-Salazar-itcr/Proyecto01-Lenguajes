@@ -172,11 +172,11 @@ void incluir_Prestamo(listaPrestamos* l)
 void incluir_Usuario(listaUsuarios* l)
 {
     int id;
-    char* nombre;
-    char* direccion;
+    char* nombre = '\0';
+    char* direccion = '\0';
 
     printf("Ingrese la identificacion del usuario: ");
-    scanf("%d", &id);
+    scanf(" %d", &id);
 
     printf("Ingrese el nombre del usuario: ");
     scanf(" %[^\n]s", nombre);

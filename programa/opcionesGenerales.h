@@ -137,7 +137,7 @@ void busquedaAvanzada(listaLibros* l){
 void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     printf("indique su id de usuario: ");
     int usuario = 0;
-    scanf("%d", &usuario);
+    scanf(" %d", &usuario);
     printf("indique el id del ejemplar: ");
     int id;
     scanf(" %d", &id);
