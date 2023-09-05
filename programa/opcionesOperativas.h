@@ -48,7 +48,8 @@ void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
 
     // Imprime los resultados ordenados
     printf("Top 3 usuarios con mas prestamos: \n");
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < numPares; i++) {
+        if (i == 3) {break;}
         Usuario* u = buscarUsuarioXid(lu, pares[i]->numero);
         printf("\t%s: %d\n", u->nombre, pares[i]->apariciones);
     }
@@ -100,11 +101,11 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
     }
 
     // Imprime los resultados ordenados
-    
+    printf("Top 3 libros con mas prestamos: \n");
+    printf("numPares: %d\n", numPares);
     for (int i = 0; i < numPares; i++) {
         if (i == 3) {break;}
         Libro* lib = buscarLibroXid(ll, pares[i]->numero);
-        printf("Top 3 ejemplares con mas prestamos: \n");
         printf("\t%s: %d\n", lib->nombre, pares[i]->apariciones);
     }
 }
