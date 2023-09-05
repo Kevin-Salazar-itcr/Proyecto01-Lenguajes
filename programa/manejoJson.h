@@ -93,10 +93,6 @@ void leerUsuarios(listaUsuarios* l){
         json_object_object_get_ex(obj, "nombre", &nombre); //extraer el nombre
         json_object_object_get_ex(obj, "direccion", &direccion); //extraer la direccion
 
-        printf("id: %d\n", json_object_get_int(id));
-        printf("nombre: %s\n", json_object_get_string(nombre));
-        printf("direccion: %s\n", json_object_get_string(direccion));
-
         user->id = json_object_get_int(id);
         user->nombre = strdup(json_object_get_string(nombre));
         user->direccion = strdup(json_object_get_string(direccion));
