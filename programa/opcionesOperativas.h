@@ -1,5 +1,6 @@
 #include "auxiliares.h"
 #include "manejoJson.h"
+#include <stdio.h>
 
 //top 3 usuarios con mas prestamos
 void top3usuarios(listaPrestamos* l) {
@@ -172,18 +173,20 @@ void incluir_Prestamo(listaPrestamos* l)
 void incluir_Usuario(listaUsuarios* l)
 {
     Usuario* usuario = calloc(1, sizeof(Usuario));
-    printf("Ingrese la identificación del usuario: ");
+    if (usuario == NULL) {
+        printf("Error: No se pudo asignar memoria para el usuario.\n");
+        return;
+    }
+
+    printf("Ingrese la identificacion del usuario: ");
     scanf("%d", &usuario->id);
-    getchar(); 
 
     printf("Ingrese el nombre del usuario: ");
-    fgets(usuario->nombre, sizeof(usuario->nombre), stdin);
-    usuario->nombre[strcspn(usuario->nombre, "\n")] = '\0'; // Eliminar el carácter de nueva línea
-
-    printf("Ingrese la dirección del usuario: ");
-    fgets(usuario->direccion, sizeof(usuario->direccion), stdin);
-    usuario->direccion[strcspn(usuario->direccion, "\n")] = '\0'; // Eliminar el carácter de nueva línea
-
+    scanf(" %[^\n]", usuario->nombre);
+    
+    printf("Ingrese la direccion del usuario: ");
+    scanf(" %[^\n]", usuario->direccion);
+    
     addUsuario(l, usuario);
     printf("Usuario agregado exitosamente\n");
 }
