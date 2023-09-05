@@ -68,7 +68,7 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
                         break;
                     }
                     case 'c':{
-                        printf("Sin implementar\n");
+                        top5recaudaciones(lp);
                         break;
                     }
                     case 'd':{
