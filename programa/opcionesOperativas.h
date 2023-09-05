@@ -16,7 +16,7 @@ void top5recaudaciones(listaPrestamos* l){
     int montos[longitud];
     Prestamo* aux = l->inicio;
     for (int i = 0; i < longitud; i++) {
-        fechas[i] = aux->fechaInicio;
+        fechas[i] = strdup(aux->fechaInicio);
         montos[i] = aux->monto;
         aux = aux->sig;
     }
@@ -24,7 +24,7 @@ void top5recaudaciones(listaPrestamos* l){
     for (int i = 0; i < longitud; i++) {
         int encontrado = 0;
         for (int j = 0; j < numConsultas; j++) {
-            if (fechas[i] == consultas[j]->fecha) {
+            if (strcmp(fechas[i], consultas[j]->fecha)==0) {
                 consultas[j]->monto += montos[i];
                 encontrado = 1;
                 break;
@@ -32,7 +32,7 @@ void top5recaudaciones(listaPrestamos* l){
         }
 
         if (!encontrado) {
-            consultas[numConsultas]->fecha = fechas[i];
+            consultas[numConsultas]->fecha = strdup(fechas[i]);
             consultas[numConsultas]->monto = montos[i];
             numConsultas++;
         }
