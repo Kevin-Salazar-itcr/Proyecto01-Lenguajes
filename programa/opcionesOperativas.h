@@ -119,7 +119,7 @@ void mostrarPrestamosRango(listaPrestamos* l)
         scanf(" %[^\n]s", fechaFin);
         
         //validar que las fechas sean validas
-        if (esFechaValida(fechaInicio) && esFechaValida(fechaFin) && compararFechas(fechaInicio, fechaFin) == 1){
+        if (esFechaValida(fechaInicio) && esFechaValida(fechaFin) && compararFechas(fechaInicio, fechaFin) == -1){
             break; 
         }
         else{
