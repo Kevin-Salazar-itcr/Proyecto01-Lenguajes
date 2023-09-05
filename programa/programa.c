@@ -20,14 +20,20 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
             break;
         }
         case '2':{
-            Usuario* u = calloc(1, sizeof(Usuario));
-
+            int id = 0;
+            char* nombre = calloc(20, sizeof(char));
+            char* direccion = calloc(50, sizeof(char));
             printf("Ingrese el id del usuario: ");
-            scanf("%d", &u->id);
+            scanf("%d", &id);
             printf("Ingrese el nombre del usuario: ");
-            scanf(" %[^\n]s", u->nombre);
+            scanf(" %[^\n]s", nombre);
             printf("Ingrese la direccion del usuario: ");
-            scanf(" %[^\n]s", u->direccion);
+            scanf(" %[^\n]s", direccion);
+
+            Usuario* u = calloc(1, sizeof(Usuario));
+            u->id = id;
+            u->nombre = nombre;
+            u->direccion = direccion;    
 
             addUsuario(lu, u);
 
