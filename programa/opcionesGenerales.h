@@ -165,7 +165,7 @@ void prestamoEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     }
 
     //validar que el usuario exista
-    Usuario* user = buscarUsuario(u, usuario);
+    Usuario* user = buscarUsuarioXid(u, usuario);
     if (user == NULL){
         printf("El usuario no existe\n");
         return;
