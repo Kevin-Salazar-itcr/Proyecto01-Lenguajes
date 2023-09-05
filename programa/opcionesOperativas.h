@@ -143,7 +143,11 @@ void recuperarLibrosTxt(listaLibros* l)
     char linea[1024];
     
     while (fgets(linea, sizeof(linea), archivo)) {
-        
+        if(buscarCoincidencias((char*)linea, "|") != 6 ){
+            printf("\nLibro no valido\n");
+            continue;
+        }
+
         Libro* libro = calloc(1, sizeof(Libro));
         libro->id = l->tam + 1;
         
@@ -165,15 +169,17 @@ void recuperarLibrosTxt(listaLibros* l)
         palabra = strtok(NULL, "|");
         libro->cantidad = strtol(palabra, NULL, 10);
         
-        printf("Título:  %s\n", libro->nombre);
-        printf("Autor:  %s\n", libro->autor);
-        printf("Año: %d\n", libro->anio);
-        printf("Género:  %s\n", libro->genero);
-        printf("Descripción:  %s\n", libro->resumen);
-        printf("Disponibles: %d\n", libro->cantidad);
-        addLibro(l, libro);
-        
-        printf("\n");
+        //validar que el libro no exista
+        if(buscarLibro(l, libro->nombre) == NULL){
+            printf("Detalles del Libro:\nTítulo:  %s\n", libro->nombre);
+            printf("Autor:  %s\n", libro->autor);
+            printf("Año: %d\n", libro->anio);
+            printf("Género:  %s\n", libro->genero);
+            printf("Descripción:  %s\n", libro->resumen);
+            printf("Disponibles: %d\n\n", libro->cantidad);
+
+            addLibro(l, libro);        
+        }
     }
     
     fclose(archivo);
