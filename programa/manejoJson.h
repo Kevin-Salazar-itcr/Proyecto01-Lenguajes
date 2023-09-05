@@ -122,6 +122,7 @@ void leerPrestamo(listaPrestamos* l){
     struct json_object *fechaFin;
     struct json_object *estado;
     struct json_object *fechaDevolucion;
+    struct json_object *monto;
     size_t n,i;
 
     fp = fopen("datos/prestamos.json", "r"); //abrir archivo en modo lectura
@@ -144,6 +145,8 @@ void leerPrestamo(listaPrestamos* l){
         json_object_object_get_ex(obj, "fechaFin", &fechaFin); //extraer la fechaFin
         json_object_object_get_ex(obj, "estado", &estado); //extraer el estado
         json_object_object_get_ex(obj, "fechaDevolucion", &fechaDevolucion); //extraer la fechaDevolucion
+        json_object_object_get_ex(obj, "monto", &monto); //extraer el monto
+        
 
         pres->id = json_object_get_int(id);
         pres->idUsuario = json_object_get_int(idUsuario);
@@ -154,6 +157,7 @@ void leerPrestamo(listaPrestamos* l){
         pres->fechaFin = strdup(json_object_get_string(fechaFin));
         pres->estado = json_object_get_int(estado);
         pres->fechaDevolucion = strdup(json_object_get_string(fechaDevolucion));
+        pres->monto = json_object_get_int(monto);
         addPrestamo(l, pres);
     }
 }    
@@ -243,6 +247,7 @@ void guardarPrestamosJson(listaPrestamos* l){
         json_object_object_add(obj, "fechaFin", json_object_new_string(aux->fechaFin));
         json_object_object_add(obj, "estado", json_object_new_int(aux->estado));
         json_object_object_add(obj, "fechaDevolucion", json_object_new_string(aux->fechaDevolucion));
+        json_object_object_add(obj, "monto", json_object_new_int(aux->monto));
 
         json_object_array_add(json_array, obj);
         aux = aux->sig;
