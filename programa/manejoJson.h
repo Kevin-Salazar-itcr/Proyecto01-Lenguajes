@@ -180,7 +180,7 @@ void guardarLibrosJson(listaLibros* l) { //puede editarse y recibir parametros p
         json_object_object_add(obj, "cantidad", json_object_new_int(aux->cantidad)); 
 
         json_object_array_add(json_array, obj);
-        aux = aux->siguiente;
+        aux = aux->sig;
     }
     
     const char *json_str = json_object_to_json_string(json_array); // Convertir a string el objeto json
@@ -210,7 +210,7 @@ void guardarUsuariosJson(listaUsuarios* l){
         json_object_object_add(obj, "direccion", json_object_new_string(aux->direccion)); 
 
         json_object_array_add(json_array, obj);
-        aux = aux->siguiente;
+        aux = aux->sig;
     }
     
     const char *json_str = json_object_to_json_string(json_array); // Convertir a string el objeto json
@@ -245,7 +245,7 @@ void guardarPrestamosJson(listaPrestamos* l){
         json_object_object_add(obj, "fechaDevolucion", json_object_new_string(aux->fechaDevolucion)); 
 
         json_object_array_add(json_array, obj);
-        aux = aux->siguiente;
+        aux = aux->sig;
     }
     
     const char *json_str = json_object_to_json_string(json_array); // Convertir a string el objeto json
