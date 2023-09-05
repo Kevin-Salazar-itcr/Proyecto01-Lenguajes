@@ -144,11 +144,11 @@ int main(){
 
     // Cargar datos
     leerUsuarios(lu);
-    printf("Usuarios cargados\n")
+    printf("Usuarios cargados\n");
     leerLibros(ll);
-    printf("Libros cargados\n")
+    printf("Libros cargados\n");
     leerPrestamo(lp);
-    printf("Prestamos cargados\n")
+    printf("Prestamos cargados\n");
 
     bool fin = false;
     while (!fin){
