@@ -32,8 +32,8 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
 
             Usuario* u = calloc(1, sizeof(Usuario));
             u->id = id;
-            u->nombre = strdup(nombre);
-            u->direccion = strdup(direccion);    
+            u->nombre = nombre;
+            u->direccion = direccion;    
 
             addUsuario(lu, u);
 
