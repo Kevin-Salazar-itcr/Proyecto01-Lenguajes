@@ -110,6 +110,32 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
     }
 }
 
+
+void mostrarPrestamosVencidos(listaPrestamos* l)
+{
+    Prestamo* aux = l->inicio;
+    while (aux != NULL)
+    {
+        int diferenciaEnDias = calcularDiferenciaEnDias(aux->fechaInicio, aux->fechaFin);
+        
+        if (diferenciaEnDias = -1)
+        {
+            printf(" ");
+        }
+        else if (diferenciaEnDias <= 3)
+        {
+            printf("\nDetalles del Prestamo:\n");
+            printf("\tId: %d\n", aux->id);
+            printf("\tUsuario:  %s\n", aux->usuario);
+            printf("\tEstado: %d\n", aux->estado);
+            printf("\tNombre:  %s\n", aux->nombreEjemplar);
+            printf("\tFecha de inicio:  %s\n", aux->fechaInicio);
+            printf("\tFecha de fin:  %s\n\n", aux->fechaFin);
+        }
+        aux = aux->sig;
+    }
+}
+
 void mostrarPrestamosRango(listaPrestamos* l)
 {
     char* fechaInicio = calloc(10, sizeof(char));
