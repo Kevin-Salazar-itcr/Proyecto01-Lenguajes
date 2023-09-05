@@ -20,7 +20,18 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
             break;
         }
         case '2':{
-	        incluir_Usuario(lu);
+            Usuario* u = calloc(1, sizeof(Usuario));
+
+            printf("Ingrese el id del usuario: ");
+            scanf("%d", &u->id);
+            printf("Ingrese el nombre del usuario: ");
+            scanf(" %[^\n]s", u->nombre);
+            printf("Ingrese la direccion del usuario: ");
+            scanf(" %[^\n]s", u->direccion);
+
+            addUsuario(lu, u);
+
+            printf("Usuario agregado exitosamente\n");
             break;
         }
         case '3':{
