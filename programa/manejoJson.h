@@ -190,7 +190,7 @@ void guardarLibrosJson(listaLibros* l) { //puede editarse y recibir parametros p
     if (file) {
         fprintf(file, "%s", json_str);
         fclose(file);
-        printf("Archivo guardado correctamente'\n");git 
+        printf("Archivo guardado correctamente'\n");
     } else {
         printf("Error al guardar.\n");
     }
