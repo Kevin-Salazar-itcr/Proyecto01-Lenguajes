@@ -172,7 +172,6 @@ typedef struct NumeroAparicion {
 
 //struct auxiliar para opciones operativas
 typedef struct Consulta{
-    int id;
     char* fecha;
     int monto;
 } Consulta;
