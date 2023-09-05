@@ -47,9 +47,10 @@ void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
     }
 
     // Imprime los resultados ordenados
+    printf("Top 3 usuarios con mas prestamos: \n");
     for (int i = 0; i < 3; i++) {
         Usuario* u = buscarUsuarioXid(lu, pares[i]->numero);
-        printf("Top 3 usuarios con mas prestamos: \n\t%s: %d\n", u->nombre, pares[i]->apariciones);
+        printf("\t%s: %d\n", u->nombre, pares[i]->apariciones);
     }
 }
 
@@ -140,6 +141,7 @@ void mostrarPrestamosRango(listaPrestamos* l)
             printf("\tFecha de inicio:  %s\n", aux->fechaInicio);
             printf("\tFecha de fin:  %s\n\n", aux->fechaFin);
         }
+        aux = aux->sig;
     }
 
 }
