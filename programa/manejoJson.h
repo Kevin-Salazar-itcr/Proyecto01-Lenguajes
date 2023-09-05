@@ -34,6 +34,7 @@ void leerLibros(listaLibros* l){
 
     parsed_json = json_tokener_parse(buffer);
     n = json_object_array_length(parsed_json);
+    printf("tam: %d\n", n);
 
     for(i = 0; i < n; i++){
             Libro* lib = calloc(1, sizeof(Libro));

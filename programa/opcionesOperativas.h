@@ -12,6 +12,7 @@ void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
     Prestamo* aux = l->inicio;
     for (int i = 0; i < longitud; i++) {
         arreglo[i] = aux->idUsuario;
+        printf(">>%d\n", arreglo[i]);
         aux = aux->sig;
     }
 
