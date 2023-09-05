@@ -145,7 +145,7 @@ int main(){
     // Cargar datos
     leerUsuarios(lu);
     leerLibros(ll);
-    leerPrestamos(lp);
+    leerPrestamo(lp);
 
     bool fin = false;
     while (!fin){
