@@ -110,28 +110,23 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
     }
 }
 
-
 void mostrarPrestamosVencidos(listaPrestamos* l)
 {
     Prestamo* aux = l->inicio;
     while (aux != NULL)
     {
-        int diferenciaEnDias = calcularDiferenciaEnDias(aux->fechaInicio, aux->fechaFin);
-        
-        if (diferenciaEnDias = -1)
-        {
-            printf(" ");
-        }
-        else if (diferenciaEnDias <= 3)
+        int diferenciaEnDias = calcularDiferenciaEnDias(fechaActual(), aux->fechaFin); //prestamos proximos a vencer
+        int prestamoVencido = compararFechas(fechaActual(), aux->fechaFin); //prestamos vencidos
+        if ((diferenciaEnDias <= 3 && aux->estado == 1) || (prestamoVencido == 1 && aux->estado == 1)) //estado 1: sin entregar
         {
             printf("\nDetalles del Prestamo:\n");
-            printf("\tId: %d\n", aux->id);
+            printf("\tPrestamo N°: %d\n", aux->id);
             printf("\tUsuario:  %s\n", aux->usuario);
-            printf("\tEstado: %d\n", aux->estado);
-            printf("\tNombre:  %s\n", aux->nombreEjemplar);
             printf("\tFecha de inicio:  %s\n", aux->fechaInicio);
-            printf("\tFecha de fin:  %s\n\n", aux->fechaFin);
+            printf("\tEjemplar:  %s\n", aux->nombreEjemplar);
+            printf("\tID ejemplar:  %d\n", aux->idEjemplar);
         }
+        
         aux = aux->sig;
     }
 }
