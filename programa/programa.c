@@ -24,7 +24,7 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
             char* nombre = calloc(20, sizeof(char));
             char* direccion = calloc(50, sizeof(char));
             printf("Ingrese el id del usuario: ");
-            scanf("%d", &id);
+            scanf(" %d", &id);
             printf("Ingrese el nombre del usuario: ");
             scanf(" %[^\n]s", nombre);
             printf("Ingrese la direccion del usuario: ");
@@ -32,8 +32,8 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
 
             Usuario* u = calloc(1, sizeof(Usuario));
             u->id = id;
-            u->nombre = nombre;
-            u->direccion = direccion;    
+            u->nombre = strdup(nombre);
+            u->direccion = strdup(direccion);    
 
             addUsuario(lu, u);
 
