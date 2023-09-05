@@ -6,13 +6,15 @@
 void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
     int longitud = l->tam;  
     NumeroAparicion* pares[longitud];
+    for (int i = 0; i < longitud; i++) {
+        pares[i] = calloc(1, sizeof(NumeroAparicion));
+    }
     int numPares = 0;
 
     int arreglo[longitud];
     Prestamo* aux = l->inicio;
     for (int i = 0; i < longitud; i++) {
         arreglo[i] = aux->idUsuario;
-        printf(">>%d\n", arreglo[i]);
         aux = aux->sig;
     }
 
@@ -54,6 +56,11 @@ void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
 void top3libros(listaPrestamos* l, listaLibros* ll) {
     int longitud = l->tam;  
     NumeroAparicion* pares[longitud];
+    //inicializar memoria
+    for (int i = 0; i < longitud; i++) {
+        pares[i] = calloc(1, sizeof(NumeroAparicion));
+    }
+
     int numPares = 0;
 
     int arreglo[longitud];
@@ -93,7 +100,6 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
 
     // Imprime los resultados ordenados
     for (int i = 0; i < 3; i++) {
-        printf("%d\n", pares[i]->numero);
         Libro* lib = buscarLibroXid(ll, pares[i]->numero);
         printf("Top 3 ejemplares con mas prestamos: \n\t%s: %d\n", lib->nombre, pares[i]->apariciones);
     }
