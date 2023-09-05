@@ -85,17 +85,17 @@ void leerUsuarios(listaUsuarios* l){
     n = json_object_array_length(parsed_json);
 
     for(i = 0; i < n; i++){
-            Usuario* user = calloc(1, sizeof(Usuario));
+        Usuario* user = calloc(1, sizeof(Usuario));
 
-            obj = json_object_array_get_idx(parsed_json, i);
-            json_object_object_get_ex(obj, "id", &id); //extraer el id
-            json_object_object_get_ex(obj, "nombre", &nombre); //extraer el nombre
-            json_object_object_get_ex(obj, "direccion", &direccion); //extraer la direccion
+        obj = json_object_array_get_idx(parsed_json, i);
+        json_object_object_get_ex(obj, "id", &id); //extraer el id
+        json_object_object_get_ex(obj, "nombre", &nombre); //extraer el nombre
+        json_object_object_get_ex(obj, "direccion", &direccion); //extraer la direccion
 
-            user->id = json_object_get_int(id);
-            strcpy(user->nombre, json_object_get_string(nombre));
-            strcpy(user->direccion, json_object_get_string(direccion));
-            addUsuario(l, user);
+        user->id = json_object_get_int(id);
+        strcpy(user->nombre, json_object_get_string(nombre));
+        strcpy(user->direccion, json_object_get_string(direccion));
+        addUsuario(l, user);
     }
 }
 
