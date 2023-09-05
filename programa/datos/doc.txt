@@ -1,10 +1,10 @@
-Cien años de soledad|Gabriel Garcia Marquez|1967|Realismo magico|Esta novela cuenta la historia de la familia Buendia en Macondo, un pueblo ficticio de Colombia.
-1984|George Orwell|1949|Distopia|En un futuro totalitario, el protagonista, Winston Smith, lucha contra el regimen de Oceania.
-Orgullo y prejuicio|Jane Austen|1813|Novela romantica|La historia sigue a Elizabeth Bennet, una joven que debe elegir entre dos pretendientes.
-Cumbres borrascosas|Emily Bronte|1847|Novela romantica|La historia sigue a Catherine Earnshaw y Heathcliff, dos amantes separados por la tragedia.
-Moby Dick|Herman Melville|1951|Novela de aventuras|La historia sigue a Ismael, un joven marinero que se embarca en un viaje para cazar a la ballena blanca Moby Dick.
-La metamorfosis|Franz Kafka|1915|Novela fantastica|La historia sigue a Gregorio Samsa, un hombre que se despierta una mañana convertido en un insecto.
-El Señor de los Anillos|J. R. R. Tolkien|1955|Novela de fantasia|La historia sigue a Frodo Bolson, un hobbit que debe destruir el Anillo Unico para salvar la Tierra Media.
-El Gran Gatsby|F. Scott Fitzgerald|1925|Novela de ficcion|La historia sigue a Jay Gatsby, un millonario que organiza grandes fiestas en su mansion para impresionar a Daisy Buchanan.
-La casa de los espiritus|Isabel Allende|1982|Novela historica|La historia sigue a la familia Trueba desde el siglo XIX hasta el siglo XX.
-El Quijote de la Mancha|Miguel de Cervantes|1615|Novela de caballeria|La historia sigue a Don Quijote de la Mancha, un hidalgo que se embarca en una serie de aventuras.
+Cien años de soledad|Gabriel Garcia Marquez|1967|Realismo magico|Esta novela cuenta la historia de la familia Buendia en Macondo, un pueblo ficticio de Colombia|4
+1984|George Orwell|1949|Distopia|En un futuro totalitario, el protagonista, Winston Smith, lucha contra el regimen de Oceania|3
+Orgullo y prejuicio|Jane Austen|1813|Novela romantica|La historia sigue a Elizabeth Bennet, una joven que debe elegir entre dos pretendientes|2
+Cumbres borrascosas|Emily Bronte|1847|Novela romantica|La historia sigue a Catherine Earnshaw y Heathcliff, dos amantes separados por la tragedia|5
+Moby Dick|Herman Melville|1951|Novela de aventuras|La historia sigue a Ismael, un joven marinero que se embarca en un viaje para cazar a la ballena blanca Moby Dick|7
+La metamorfosis|Franz Kafka|1915|Novela fantastica|La historia sigue a Gregorio Samsa, un hombre que se despierta una mañana convertido en un insecto|14
+El Señor de los Anillos|J. R. R. Tolkien|1955|Novela de fantasia|La historia sigue a Frodo Bolson, un hobbit que debe destruir el Anillo Unico para salvar la Tierra Media|3
+El Gran Gatsby|F. Scott Fitzgerald|1925|Novela de ficcion|La historia sigue a Jay Gatsby, un millonario que organiza grandes fiestas en su mansion para impresionar a Daisy Buchanan|9
+La casa de los espiritus|Isabel Allende|1982|Novela historica|La historia sigue a la familia Trueba desde el siglo XIX hasta el siglo XX|4
+El Quijote de la Mancha|Miguel de Cervantes|1615|Novela de caballeria|La historia sigue a Don Quijote de la Mancha, un hidalgo que se embarca en una serie de aventuras|5
