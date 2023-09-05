@@ -9,7 +9,7 @@
 bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
     char opcion;
     printf("      o    ~~~^-< ### >-^~~~    o\n      (___/ Biblioteca V1.0 \\___)\n********** *Menu de opciones* ***********\n");
-    printf("\t1. Gestion de catalogo\n\t2. Gestion de usuarios 2\n\t3. Historial de prestamos\n");
+    printf("\t1. Gestion de catalogo\n\t2. Gestion de usuarios\n\t3. Historial de prestamos\n");
     printf("\t4. Vencimiento de prestamos\n\t5. Estadisticas\n\t6. Volver\n");
     printf("Ingrese una opcion >>");
     scanf(" %c", &opcion);
@@ -49,7 +49,7 @@ bool opsOperativas(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
             break;
         }
         case '5':{
-            char opcion2;
+            char opcion2 = '';
             while(opcion2 != 'd'){
                 printf("a) Top 3 ejemplares mas prestados\n");
                 printf("b) Top 3 usuarios con mas prestamos\n");
@@ -150,7 +150,7 @@ bool opsGenerales(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
 bool menu(listaLibros *ll, listaUsuarios *lu, listaPrestamos *lp){
     char opcion;
     printf("      o    ~~~^-< ### >-^~~~    o\n      (___/ Biblioteca V1.0 \\___)\n********** *Menu de opciones* ***********\n");
-    printf("\t1. Opciones operativas\n\t2. Opciones generales 2\n\t3. Salir\n");
+    printf("\t1. Opciones operativas\n\t2. Opciones generales\n\t3. Salir\n");
     printf("Ingrese una opcion >>");
     scanf(" %c", &opcion);
 

@@ -251,10 +251,10 @@ void devolverEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     int diasHabiles = calcularDiferenciaEnDias(prestamo->fechaInicio, prestamo->fechaFin);
     int diasEntrega = calcularDiferenciaEnDias(prestamo->fechaInicio, fechaDevolucion);
     
-    if(diasEntrega == 0){
-        printf("No puede devolver el libro el mismo dia que lo presto\n");
-        return;
-    }
+    // if(diasEntrega == 0){
+    //     printf("No puede devolver el libro el mismo dia que lo presto\n");
+    //     return;
+    // }
 
     int monto = 0;
     if(diasHabiles >= 1 && diasHabiles <= 7){

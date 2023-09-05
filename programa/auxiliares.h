@@ -5,12 +5,11 @@
 #include <stdbool.h>
 
 /**
- * @brief funcion que busca coincidencias de un texto en un archivo
- * @param cadena texto donde se quiere buscar una coincidencia
- * @param coincidencia texto a buscar
- * @return la cantidad de coincidencias encontradas
+ * @brief funcion auxiliar para obtener el largo de una cadena
+ * 
+ * @param cadena cadena de caracteres
+ * @return int el largo de la cadena
  */
-
 int largo(char *cadena)
 {
     int i = 0;
@@ -21,8 +20,13 @@ int largo(char *cadena)
     return i;
 }
 
-int buscarCoincidencias(char *cadena, char *coincidencia)
-{
+/**
+ * @brief funcion que busca coincidencias de un texto en un archivo
+ * @param cadena texto donde se quiere buscar una coincidencia
+ * @param coincidencia texto a buscar
+ * @return la cantidad de coincidencias encontradas
+ */
+int buscarCoincidencias(char *cadena, char *coincidencia) {
     int largoCadena = largo(cadena);
     int largoCoincidencia = largo(coincidencia);
     
