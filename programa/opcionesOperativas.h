@@ -137,60 +137,6 @@ void mostrarPrestamosRango(listaPrestamos* l)
 
 }
 
-void incluir_Prestamo(listaPrestamos* l)
-{
-    Prestamo* prestamo = calloc(1, sizeof(Prestamo));
-    
-    prestamo->id = l->tam + 1;
-    printf("Ingrese el nombre del usuario: ");
-    scanf(" %[^\n]s", prestamo->usuario);
-    printf("Ingrese el estado del prestamo: ");
-    scanf("%d", &prestamo->estado);
-    printf("Ingrese el nombre del libro: ");
-    scanf(" %[^\n]s", prestamo->nombreEjemplar);
-    while(true){
-        printf("Ingrese la fecha de inicio del prestamo: ");
-        scanf(" %[^\n]s", prestamo->fechaInicio);
-        
-        printf("Ingrese la fecha de fin del prestamo: ");
-        scanf(" %[^\n]s", prestamo->fechaFin);
-        
-        if (esFechaValida(prestamo->fechaInicio) && esFechaValida(prestamo->fechaFin)){
-            if(compararFechas(prestamo->fechaInicio, prestamo->fechaFin) == 1){
-                break;
-            }
-            else{
-                printf("La fecha de inicio debe ser menor a la fecha de fin\n");
-            }
-        }
-        else{
-            printf("Ingrese una fecha valida\n");
-        }
-    }
-    addPrestamo(l, prestamo);
-}
-
-void incluir_Usuario(listaUsuarios* l)
-{
-    Usuario* usuario = calloc(1, sizeof(Usuario));
-    if (usuario == NULL) {
-        printf("Error: No se pudo asignar memoria para el usuario.\n");
-        return;
-    }
-
-    printf("Ingrese la identificacion del usuario: ");
-    scanf("%d", &usuario->id);
-
-    printf("Ingrese el nombre del usuario: ");
-    scanf(" %[^\n]", usuario->nombre);
-    
-    printf("Ingrese la direccion del usuario: ");
-    scanf(" %[^\n]", usuario->direccion);
-    
-    addUsuario(l, usuario);
-    printf("Usuario agregado exitosamente\n");
-}
-
 void recuperarLibrosTxt(listaLibros* l) 
 {
     FILE *archivo = fopen("datos/doc.txt", "r");
