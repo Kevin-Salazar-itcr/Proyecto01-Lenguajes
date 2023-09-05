@@ -280,5 +280,18 @@ void devolverEjemplar(listaLibros* l, listaUsuarios* u, listaPrestamos* p){
     printf("Su prestamo ha sido devuelto con una tardia de %d dias\n", diasEntrega - diasHabiles);
     prestamo->estado = 0;
     prestamo->fechaDevolucion = fechaDevolucion;
+    prestamo->monto = monto;
+
+    //devolver el ejemplar a la su respectiva lista
+    Libro* aux = l->inicio;
+    while (aux != NULL)
+    {
+        if (aux->id == prestamo->idEjemplar)
+        {
+            aux->cantidad++;
+            break;
+        }
+        aux = aux->sig;
+    }
     return;
 }

@@ -2,6 +2,61 @@
 #include "manejoJson.h"
 #include <stdio.h>
 
+void top5recaudaciones(listaPrestamos* l){
+    int longitud = l->tam;
+    Consulta* consultas[longitud];
+    for (int i = 0; i < longitud; i++) {
+        consultas[i] = calloc(1, sizeof(Consulta));
+        
+    }
+    int numConsultas = 0;
+
+    //arreglo que guarda las fechas de inicio de los prestamos
+    char* fechas[longitud];
+    int montos[longitud];
+    Prestamo* aux = l->inicio;
+    for (int i = 0; i < longitud; i++) {
+        fechas[i] = aux->fechaInicio;
+        montos[i] = aux->monto;
+        aux = aux->sig;
+    }
+
+    for (int i = 0; i < longitud; i++) {
+        int encontrado = 0;
+        for (int j = 0; j < numConsultas; j++) {
+            if (fechas[i] == consultas[j]->fecha) {
+                consultas[j]->monto += montos[i];
+                encontrado = 1;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            consultas[numConsultas]->fecha = fechas[i];
+            consultas[numConsultas]->monto = montos[i];
+            numConsultas++;
+        }
+    }
+
+    // Ordena la estructura de consultas en función del monto de forma descendente
+    for (int i = 0; i < numConsultas - 1; i++) {
+        for (int j = i + 1; j < numConsultas; j++) {
+            if (consultas[i]->monto < consultas[j]->monto) {
+                Consulta* temp = consultas[i];
+                consultas[i] = consultas[j];
+                consultas[j] = temp;
+            }
+        }
+    }
+
+    // Imprime los resultados ordenados
+    printf("Top 5 recaudaciones: \n");
+    for (int i = 0; i < numConsultas; i++) {
+        if (i == 5) {break;}
+        printf("\t%s: %d\n", consultas[i]->fecha, consultas[i]->monto);
+    }
+}
+
 //top 3 usuarios con mas prestamos
 void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
     int longitud = l->tam;  
@@ -11,6 +66,7 @@ void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
     }
     int numPares = 0;
 
+    //el arreglo guarda los id de los usuarios
     int arreglo[longitud];
     Prestamo* aux = l->inicio;
     for (int i = 0; i < longitud; i++) {
@@ -164,10 +220,19 @@ void mostrarPrestamosRango(listaPrestamos* l)
             printf("\nDetalles del Prestamo:\n");
             printf("\tId: %d\n", aux->id);
             printf("\tUsuario:  %s\n", aux->usuario);
-            printf("\tEstado: %d\n", aux->estado);
+            printf("\tEstado: %s\n", aux->estado > 0 ? "Activo" : "Finalizado");
             printf("\tNombre:  %s\n", aux->nombreEjemplar);
-            printf("\tFecha de inicio:  %s\n", aux->fechaInicio);
-            printf("\tFecha de fin:  %s\n\n", aux->fechaFin);
+            printf("\tID ejemplar:  %d\n", aux->idEjemplar);
+            
+            //imprimir si se entrego con tardia o no
+            if(aux->estado == 0){
+                if(compararFechas(aux->fechaFin, aux->fechaEntrega) == 1){
+                    printf("\tEntrega tardia: si\n");
+                }
+                else{
+                    printf("\tEntrega tardia: no\n");
+                }
+            }
         }
         aux = aux->sig;
     }
@@ -176,7 +241,11 @@ void mostrarPrestamosRango(listaPrestamos* l)
 
 void recuperarLibrosTxt(listaLibros* l) 
 {
-    FILE *archivo = fopen("datos/doc.txt", "r");
+    char* nombreArchivo = calloc(100, sizeof(char));
+    printf("Ingrese el nombre del archivo (seguido por .txt): ");
+    scanf(" %[^\n]s", nombreArchivo);
+
+    FILE *archivo = fopen("datos/"+nombreArchivo, "r");
     char linea[1024];
     
     while (fgets(linea, sizeof(linea), archivo)) {

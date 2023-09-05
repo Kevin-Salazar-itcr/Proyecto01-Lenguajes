@@ -124,6 +124,7 @@ typedef struct Prestamo{
   char* fechaFin;
   int estado;
   char* fechaDevolucion;
+  int monto;
   struct Prestamo* sig;
 }Prestamo;
 
@@ -168,3 +169,10 @@ typedef struct NumeroAparicion {
   int numero;
   int apariciones;
 } NumeroAparicion;
+
+//struct auxiliar para opciones operativas
+typedef struct Consulta{
+    int id;
+    char* fecha;
+    int apariciones;
+} Consulta;
