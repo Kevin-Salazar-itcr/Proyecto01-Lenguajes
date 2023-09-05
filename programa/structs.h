@@ -174,5 +174,5 @@ typedef struct NumeroAparicion {
 typedef struct Consulta{
     int id;
     char* fecha;
-    int apariciones;
+    int monto;
 } Consulta;

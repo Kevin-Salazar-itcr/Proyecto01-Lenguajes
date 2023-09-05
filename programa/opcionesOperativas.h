@@ -226,7 +226,7 @@ void mostrarPrestamosRango(listaPrestamos* l)
             
             //imprimir si se entrego con tardia o no
             if(aux->estado == 0){
-                if(compararFechas(aux->fechaFin, aux->fechaEntrega) == 1){
+                if(compararFechas(aux->fechaFin, aux->fechaDevolucion) == 1){
                     printf("\tEntrega tardia: si\n");
                 }
                 else{
@@ -242,10 +242,10 @@ void mostrarPrestamosRango(listaPrestamos* l)
 void recuperarLibrosTxt(listaLibros* l) 
 {
     char* nombreArchivo = calloc(100, sizeof(char));
-    printf("Ingrese el nombre del archivo (seguido por .txt): ");
+    printf("Ingrese la ruta del archivo: ");
     scanf(" %[^\n]s", nombreArchivo);
 
-    FILE *archivo = fopen("datos/"+nombreArchivo, "r");
+    FILE *archivo = fopen(nombreArchivo, "r");
     char linea[1024];
     
     while (fgets(linea, sizeof(linea), archivo)) {
