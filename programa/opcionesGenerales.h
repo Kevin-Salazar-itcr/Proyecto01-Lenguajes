@@ -69,10 +69,6 @@ void busquedaAvanzada(listaLibros* l){
         }
     }
     printf("\n\n*********Iniciando busqueda*********\n\n");
-    
-    for(int i = 0; i < 6; i++){
-        printf("%s\n", datos[i]);
-    }
 
     int n = 0;
     Libro* aux = l->inicio;
