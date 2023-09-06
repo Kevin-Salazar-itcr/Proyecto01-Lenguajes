@@ -158,7 +158,6 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
 
     // Imprime los resultados ordenados
     printf("Top 3 libros con mas prestamos: \n");
-    printf("numPares: %d\n", numPares);
     for (int i = 0; i < numPares; i++) {
         if (i == 3) {break;}
         Libro* lib = buscarLibroXid(ll, pares[i]->numero);
@@ -199,9 +198,6 @@ void mostrarPrestamosRango(listaPrestamos* l)
         printf("Ingrese la fecha de fin: ");
         scanf(" %[^\n]s", fechaFin);
         
-        //imprimir fechas
-        printf("Fecha de inicio: %s\n", fechaInicio);
-        printf("Fecha de fin: %s\n", fechaFin);
         //validar que las fechas sean validas
         if (esFechaValida(fechaInicio) && esFechaValida(fechaFin) && compararFechas(fechaInicio, fechaFin) == -1){
             break; 
