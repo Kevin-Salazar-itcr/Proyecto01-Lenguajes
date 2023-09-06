@@ -261,6 +261,11 @@ void recuperarLibrosTxt(listaLibros* l)
         char *palabra = strtok(linea, "|");
         libro->nombre = strdup (palabra);
         
+        if(buscarLibro(l, libro->nombre) != NULL){
+            printf("\nEl libro ya existe\n");
+            continue;
+        }
+
         palabra = strtok(NULL, "|");
         libro->autor = strdup(palabra);
         
