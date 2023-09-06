@@ -249,7 +249,8 @@ void recuperarLibrosTxt(listaLibros* l)
     char linea[1024];
     
     while (fgets(linea, sizeof(linea), archivo)) {
-        if(buscarCoincidencias((char*)linea, "|") != 6 ){
+
+        if(buscarCoincidencias(linea, "|") != 5 ){
             printf("\nLibro no valido\n");
             continue;
         }
