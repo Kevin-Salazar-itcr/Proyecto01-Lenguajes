@@ -1,7 +1,8 @@
 a. Nombre del curso: Lenguajes de Programación
 b. Segundo semestre 2022
-c. Nombre de los Estudiantes: Adjany Gard (2021), Kevin Salazar (2021138547)
+c. Nombre de los Estudiantes: 
+	Adjany Gard (2021117164)
+	Kevin Salazar (2021138547)
 d. Proyecto programado #1
-e. Fecha de entrega: Sin definir
-f. Estatus de la entrega (debe ser CONGRUENTE con la solución entregada): 
-[Deplorable|Regular|Buena|MuyBuena|Excelente|Superior]
+e. Fecha de entrega: 05 de septiembre
+f. Estatus de la entrega: MuyBuena
