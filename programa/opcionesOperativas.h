@@ -2,6 +2,13 @@
 #include "manejoJson.h"
 #include <stdio.h>
 
+
+/**
+ * @brief funcion que se encargar de imprimir el top 5 de los meses con mayor recaudacion 
+ * 
+ * @param l lista de libros
+ */
+
 void top5recaudaciones(listaPrestamos* l){
     int longitud = l->tam;
     Consulta* consultas[longitud];
@@ -49,7 +56,6 @@ void top5recaudaciones(listaPrestamos* l){
         }
     }
 
-    // Imprime los resultados ordenados
     printf("Top 5 recaudaciones: \n");
     for (int i = 0; i < numConsultas; i++) {
         if (i == 5) {break;}
@@ -57,7 +63,12 @@ void top5recaudaciones(listaPrestamos* l){
     }
 }
 
-//top 3 usuarios con mas prestamos
+/**
+ * @brief funcion que se encargar de imprimir el top 3 de los usuarios con más prestamos 
+ * 
+ * @param l lista de libros
+ * @param 2 lista de usuarios
+ */
 void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
     int longitud = l->tam;  
     NumeroAparicion* pares[longitud];
@@ -102,7 +113,6 @@ void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
         }
     }
 
-    // Imprime los resultados ordenados
     printf("Top 3 usuarios con mas prestamos: \n");
     for (int i = 0; i < numPares; i++) {
         if (i == 3) {break;}
@@ -110,6 +120,14 @@ void top3usuarios(listaPrestamos* l, listaUsuarios* lu) {
         printf("\t%s: %d\n", u->nombre, pares[i]->apariciones);
     }
 }
+
+
+/**
+ * @brief funcion que se encargar de imprimir el top 3 de los libros más prestados
+ * 
+ * @param l lista de prestamos
+ * @param 2 lista de libros
+ */
 
 void top3libros(listaPrestamos* l, listaLibros* ll) {
     int longitud = l->tam;  
@@ -165,6 +183,15 @@ void top3libros(listaPrestamos* l, listaLibros* ll) {
     }
 }
 
+
+
+/**
+ * @brief funcion que se encargar de imprimir los prestamos vencidos o proximos a vencer
+ * 
+ * @param l lista de prestamos
+ */
+
+
 void mostrarPrestamosVencidos(listaPrestamos* l)
 {
     Prestamo* aux = l->inicio;
@@ -186,6 +213,13 @@ void mostrarPrestamosVencidos(listaPrestamos* l)
     }
 }
 
+
+
+/**
+ * @brief funcion que se encargar de imprimir los prestamos hecho en un rango de fechas asignado
+ * 
+ * @param l lista de prestamos
+ */
 void mostrarPrestamosRango(listaPrestamos* l)
 {
     char* fechaInicio = calloc(10, sizeof(char));
@@ -234,6 +268,14 @@ void mostrarPrestamosRango(listaPrestamos* l)
     }
 
 }
+
+
+/**
+ * @brief funcion que se encargar de traer la información de los libros de un txt
+ * 
+ * @param l lista de libros
+ */
+
 
 void recuperarLibrosTxt(listaLibros* l) 
 {
