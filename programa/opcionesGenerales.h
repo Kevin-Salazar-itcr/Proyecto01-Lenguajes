@@ -115,12 +115,12 @@ void busquedaAvanzada(listaLibros* l){
         else{
             //si se quiere buscar por todos los rubros (uso de &&)
             if(strcmp(datos[5], "s") == 0){
-                printf("%d\n %s %s", buscarCoincidencias(datos[0], aux->nombre), datos[0], aux->nombre);
-                printf("%d\n %s %s", buscarCoincidencias(datos[1], aux->autor), datos[1], aux->autor);
-                printf("%d\n %s %s", buscarCoincidencias(datos[2], aux->genero), datos[2], aux->genero);
-                printf("%d\n %s %s", buscarCoincidencias(datos[3], aux->resumen), datos[3], aux->resumen);
+                printf("%d %s %s\n", buscarCoincidencias(aux->nombre, datos[0]), datos[0], aux->nombre);
+                printf("%d %s %s\n", buscarCoincidencias(aux->autor, datos[1]), datos[1], aux->autor);
+                printf("%d %s %s\n", buscarCoincidencias(aux->genero,datos[2]), datos[2], aux->genero);
+                printf("%d %s %s\n", buscarCoincidencias(aux->resumen, datos[3]), datos[3], aux->resumen);
 
-                if(buscarCoincidencias(datos[0], aux->nombre) > 0 && buscarCoincidencias(datos[1], aux->autor) > 0 && buscarCoincidencias(datos[2], aux->genero) > 0 && buscarCoincidencias(datos[3], aux->resumen) > 0){
+                if(buscarCoincidencias(aux->nombre, datos[0]) > 0 && buscarCoincidencias(aux->autor, datos[1]) > 0 && buscarCoincidencias(aux->genero, datos[2]) > 0 && buscarCoincidencias(aux->resumen, datos[3]) > 0){
                     printf("\nDetalles del Libro:\n");
                     printf("\tId: %d\n", aux->id);
                     printf("\tNombre:  %s\n", aux->nombre);
@@ -130,12 +130,12 @@ void busquedaAvanzada(listaLibros* l){
             }
             //si no se quiere buscar por todos los rubros (uso de ||)
             else{
-                printf("%d\n %s %s", buscarCoincidencias(datos[0], aux->nombre), datos[0], aux->nombre);
-                printf("%d\n %s %s", buscarCoincidencias(datos[1], aux->autor), datos[1], aux->autor);
-                printf("%d\n %s %s", buscarCoincidencias(datos[2], aux->genero), datos[2], aux->genero);
-                printf("%d\n %s %s", buscarCoincidencias(datos[3], aux->resumen), datos[3], aux->resumen);
+                printf("%d %s %s\n", buscarCoincidencias(aux->nombre, datos[0]), datos[0], aux->nombre);
+                printf("%d %s %s\n", buscarCoincidencias(aux->autor, datos[1]), datos[1], aux->autor);
+                printf("%d %s %s\n", buscarCoincidencias(aux->genero,datos[2]), datos[2], aux->genero);
+                printf("%d %s %s\n", buscarCoincidencias(aux->resumen, datos[3]), datos[3], aux->resumen);
 
-                if(buscarCoincidencias(datos[0], aux->nombre) > 0 || buscarCoincidencias(datos[1], aux->autor) > 0 || buscarCoincidencias(datos[2], aux->genero) > 0 || buscarCoincidencias(datos[3], aux->resumen) > 0){
+                if(buscarCoincidencias(aux->nombre, datos[0]) > 0 || buscarCoincidencias(aux->autor, datos[1]) > 0 || buscarCoincidencias(aux->genero, datos[2]) > 0 || buscarCoincidencias(aux->resumen, datos[3]) > 0){
                     printf("\nDetalles del Libro:\n");
                     printf("\tId: %d\n", aux->id);
                     printf("\tNombre:  %s\n", aux->nombre);
